@@ -1345,10 +1345,10 @@ h6:hover .anchor-link {
 
  
  
-&lt;div id="a35a0329-fead-4c96-b8c0-d3ac64cac02a"&gt;&lt;/div&gt;
+&lt;div id="85ff75e2-0125-47d4-8126-c251a9abb4b0"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#a35a0329-fead-4c96-b8c0-d3ac64cac02a');
+var element = $('#85ff75e2-0125-47d4-8126-c251a9abb4b0');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "d8b98eabab624076bdfa0261cd951728", "version_major": 2, "version_minor": 0}
@@ -1387,10 +1387,10 @@ var element = $('#a35a0329-fead-4c96-b8c0-d3ac64cac02a');
 
  
  
-&lt;div id="3eb23961-8d87-4308-8015-679bf1b1d5e5"&gt;&lt;/div&gt;
+&lt;div id="8a7716ab-c927-4852-b2ef-d5e89a9c5e8b"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#3eb23961-8d87-4308-8015-679bf1b1d5e5');
+var element = $('#8a7716ab-c927-4852-b2ef-d5e89a9c5e8b');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "67c99d23abaf4aa286eac99c1bd69aee", "version_major": 2, "version_minor": 0}
@@ -1443,7 +1443,7 @@ var element = $('#3eb23961-8d87-4308-8015-679bf1b1d5e5');
     (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
 }
 &lt;/script&gt;
-</content><category term="Minitools"></category><category term="jupyter"></category><category term="cheminformatics"></category><category term="minitool"></category><category term="analysis"></category><category term="plot"></category></entry><entry><title>Building a Multi-Molecule Mol2 reader for RDKit</title><link href="/articles/2019/07/18/building-a-multi-molecule-mol2-reader-for-rdkit/" rel="alternate"></link><published>2019-07-18T00:00:00-05:00</published><updated>2019-07-18T00:00:00-05:00</updated><author><name>Angel J. Ruiz Moreno</name></author><id>tag:None,2019-07-18:/articles/2019/07/18/building-a-multi-molecule-mol2-reader-for-rdkit/</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
+</content><category term="Mini-tools"></category><category term="jupyter"></category><category term="cheminformatics"></category><category term="minitool"></category><category term="analysis"></category><category term="plot"></category></entry><entry><title>Building a Multi-Molecule Mol2 reader for RDKit</title><link href="/articles/2019/07/18/building-a-multi-molecule-mol2-reader-for-rdkit/" rel="alternate"></link><published>2019-07-18T00:00:00-05:00</published><updated>2019-07-18T00:00:00-05:00</updated><author><name>Angel J. Ruiz Moreno</name></author><id>tag:None,2019-07-18:/articles/2019/07/18/building-a-multi-molecule-mol2-reader-for-rdkit/</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
