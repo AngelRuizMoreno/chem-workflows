@@ -9,7 +9,7 @@
 
 
 
-<link rel="canonical" href="/articles/2019/06/24/pose-clustering-of-docking-results/">
+<link rel="canonical" href="www.chem-workflows.com/articles/2019/06/24/pose-clustering-of-docking-results/">
 
         <meta name="author" content="Angel J. Ruiz Moreno" />
         <meta name="keywords" content="pose clustering,docking,cheminformatics,hierarchical clustering,heatmap,in place rms,rms,rmsd" />
@@ -17,7 +17,7 @@
         <meta property="og:site_name" content="Cheminformatics Workflows" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="Pose Clustering of Docking Results"/>
-        <meta property="og:url" content="/articles/2019/06/24/pose-clustering-of-docking-results/"/>
+        <meta property="og:url" content="www.chem-workflows.com/articles/2019/06/24/pose-clustering-of-docking-results/"/>
         <meta property="og:description" content=""/>
         <meta property="article:published_time" content="2019-06-24" />
             <meta property="article:section" content="Workflows" />
@@ -34,17 +34,14 @@
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="/theme/css/bootstrap.readable.min.css" type="text/css"/>
-    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="www.chem-workflows.com/theme/css/bootstrap.readable.min.css" type="text/css"/>
+    <link href="www.chem-workflows.com/theme/css/font-awesome.min.css" rel="stylesheet">
 
-    <link href="/theme/css/pygments/colorful.css" rel="stylesheet">
-    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+    <link href="www.chem-workflows.com/theme/css/pygments/colorful.css" rel="stylesheet">
+    <link rel="stylesheet" href="www.chem-workflows.com/theme/css/style.css" type="text/css"/>
 
-        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Cheminformatics Workflows ATOM Feed"/>
 
-        <link href="/feeds/workflows.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Cheminformatics Workflows Workflows ATOM Feed"/>
+
 </head>
 <body>
 
@@ -57,19 +54,22 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="navbar-brand">
+            <a href="www.chem-workflows.com/" class="navbar-brand">
 Cheminformatics Workflows            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li><a href="/pages/about-me/">
+                         <li><a href="www.chem-workflows.com/pages/about-me/">
                              About Me
                           </a></li>
                         <li >
-                            <a href="/category/mini-tools">Mini-tools</a>
+                            <a href="www.chem-workflows.com/category/mini-tools">Mini-tools</a>
+                        </li>
+                        <li >
+                            <a href="www.chem-workflows.com/category/minitools">Minitools</a>
                         </li>
                         <li class="active">
-                            <a href="/category/workflows">Workflows</a>
+                            <a href="www.chem-workflows.com/category/workflows">Workflows</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -90,7 +90,7 @@ Cheminformatics Workflows            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="/articles/2019/06/24/pose-clustering-of-docking-results/"
+                    <a href="www.chem-workflows.com/articles/2019/06/24/pose-clustering-of-docking-results/"
                        rel="bookmark"
                        title="Permalink to Pose Clustering of Docking Results">
                         Pose Clustering of Docking Results
@@ -103,7 +103,7 @@ Cheminformatics Workflows            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2019-06-24T00:00:00-05:00"> Mon 24 June 2019</time>
+        <i class="fa fa-calendar"></i><time datetime="2019-06-24T00:00:00-05:00"> lun 24 junio 2019</time>
     </span>
 
 
@@ -111,21 +111,21 @@ Cheminformatics Workflows            </a>
 
 
 <span class="label label-default">Tags</span>
-	<a href="/tag/pose-clustering">pose clustering</a>
+	<a href="www.chem-workflows.com/tag/pose-clustering">pose clustering</a>
         /
-	<a href="/tag/docking">docking</a>
+	<a href="www.chem-workflows.com/tag/docking">docking</a>
         /
-	<a href="/tag/cheminformatics">cheminformatics</a>
+	<a href="www.chem-workflows.com/tag/cheminformatics">cheminformatics</a>
         /
-	<a href="/tag/hierarchical-clustering">hierarchical clustering</a>
+	<a href="www.chem-workflows.com/tag/hierarchical-clustering">hierarchical clustering</a>
         /
-	<a href="/tag/heatmap">heatmap</a>
+	<a href="www.chem-workflows.com/tag/heatmap">heatmap</a>
         /
-	<a href="/tag/in-place-rms">in place rms</a>
+	<a href="www.chem-workflows.com/tag/in-place-rms">in place rms</a>
         /
-	<a href="/tag/rms">rms</a>
+	<a href="www.chem-workflows.com/tag/rms">rms</a>
         /
-	<a href="/tag/rmsd">rmsd</a>
+	<a href="www.chem-workflows.com/tag/rmsd">rmsd</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
@@ -134,9 +134,124 @@ Cheminformatics Workflows            </a>
 * IPython notebook
 *
 */
-/* CSS font colors for translated ANSI colors. */
+/* CSS font colors for translated ANSI escape sequences */
+/* The color values are a mix of
+   http://www.xcolors.net/dl/baskerville-ivorylight and
+   http://www.xcolors.net/dl/euphrasia */
+.ansi-black-fg {
+  color: #3E424D;
+}
+.ansi-black-bg {
+  background-color: #3E424D;
+}
+.ansi-black-intense-fg {
+  color: #282C36;
+}
+.ansi-black-intense-bg {
+  background-color: #282C36;
+}
+.ansi-red-fg {
+  color: #E75C58;
+}
+.ansi-red-bg {
+  background-color: #E75C58;
+}
+.ansi-red-intense-fg {
+  color: #B22B31;
+}
+.ansi-red-intense-bg {
+  background-color: #B22B31;
+}
+.ansi-green-fg {
+  color: #00A250;
+}
+.ansi-green-bg {
+  background-color: #00A250;
+}
+.ansi-green-intense-fg {
+  color: #007427;
+}
+.ansi-green-intense-bg {
+  background-color: #007427;
+}
+.ansi-yellow-fg {
+  color: #DDB62B;
+}
+.ansi-yellow-bg {
+  background-color: #DDB62B;
+}
+.ansi-yellow-intense-fg {
+  color: #B27D12;
+}
+.ansi-yellow-intense-bg {
+  background-color: #B27D12;
+}
+.ansi-blue-fg {
+  color: #208FFB;
+}
+.ansi-blue-bg {
+  background-color: #208FFB;
+}
+.ansi-blue-intense-fg {
+  color: #0065CA;
+}
+.ansi-blue-intense-bg {
+  background-color: #0065CA;
+}
+.ansi-magenta-fg {
+  color: #D160C4;
+}
+.ansi-magenta-bg {
+  background-color: #D160C4;
+}
+.ansi-magenta-intense-fg {
+  color: #A03196;
+}
+.ansi-magenta-intense-bg {
+  background-color: #A03196;
+}
+.ansi-cyan-fg {
+  color: #60C6C8;
+}
+.ansi-cyan-bg {
+  background-color: #60C6C8;
+}
+.ansi-cyan-intense-fg {
+  color: #258F8F;
+}
+.ansi-cyan-intense-bg {
+  background-color: #258F8F;
+}
+.ansi-white-fg {
+  color: #C5C1B4;
+}
+.ansi-white-bg {
+  background-color: #C5C1B4;
+}
+.ansi-white-intense-fg {
+  color: #A1A6B2;
+}
+.ansi-white-intense-bg {
+  background-color: #A1A6B2;
+}
+.ansi-default-inverse-fg {
+  color: #FFFFFF;
+}
+.ansi-default-inverse-bg {
+  background-color: #000000;
+}
+.ansi-bold {
+  font-weight: bold;
+}
+.ansi-underline {
+  text-decoration: underline;
+}
+/* The following styles are deprecated an will be removed in a future version */
 .ansibold {
   font-weight: bold;
+}
+.ansi-inverse {
+  outline: 0.5px dotted;
 }
 /* use dark versions for foreground, to improve visibility */
 .ansiblack {
@@ -215,12 +330,20 @@ div.cell {
   /* This acts as a spacer between cells, that is outside the border */
   margin: 0px;
   outline: none;
-  border-left-width: 1px;
-  padding-left: 5px;
-  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+  position: relative;
+  overflow: visible;
+}
+div.cell:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: transparent;
 }
 div.cell.jupyter-soft-selected {
-  border-left-color: #90CAF9;
   border-left-color: #E3F2FD;
   border-left-width: 1px;
   padding-left: 5px;
@@ -233,27 +356,39 @@ div.cell.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected {
+div.cell.selected,
+div.cell.selected.jupyter-soft-selected {
   border-color: #ababab;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+div.cell.selected:before,
+div.cell.selected.jupyter-soft-selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #42A5F5;
 }
 @media print {
-  div.cell.selected {
+  div.cell.selected,
+  div.cell.selected.jupyter-soft-selected {
     border-color: transparent;
   }
 }
-div.cell.selected.jupyter-soft-selected {
-  border-left-width: 0;
-  padding-left: 6px;
-  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
-}
 .edit_mode div.cell.selected {
   border-color: #66BB6A;
-  border-left-width: 0px;
-  padding-left: 6px;
-  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+.edit_mode div.cell.selected:before {
+  position: absolute;
+  display: block;
+  top: -1px;
+  left: -1px;
+  width: 5px;
+  height: calc(100% +  2px);
+  content: '';
+  background: #66BB6A;
 }
 @media print {
   .edit_mode div.cell.selected {
@@ -449,7 +584,9 @@ div.input_area > div.highlight > pre {
 .CodeMirror-lines {
   /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
   /* we have set a different line-height and want this to scale with that. */
-  padding: 0.4em;
+  /* Note that this should set vertical padding only, since CodeMirror assumes
+       that horizontal padding will be set on CodeMirror pre */
+  padding: 0.4em 0;
 }
 .CodeMirror-linenumber {
   padding: 0 8px 0 4px;
@@ -459,11 +596,24 @@ div.input_area > div.highlight > pre {
   border-top-left-radius: 2px;
 }
 .CodeMirror pre {
-  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
-  /* .CodeMirror-lines */
-  padding: 0;
+  /* In CM3 this went to 4px from 0 in CM2. This sets horizontal padding only,
+    use .CodeMirror-lines for vertical */
+  padding: 0 0.4em;
   border: 0;
   border-radius: 0;
+}
+.CodeMirror-cursor {
+  border-left: 1.4px solid black;
+}
+@media screen and (min-width: 2138px) and (max-width: 4319px) {
+  .CodeMirror-cursor {
+    border-left: 2px solid black;
+  }
+}
+@media screen and (min-width: 4320px) {
+  .CodeMirror-cursor {
+    border-left: 4px solid black;
+  }
 }
 /*
 
@@ -711,6 +861,9 @@ div.output_area img.unconfined,
 div.output_area svg.unconfined {
   max-width: none;
 }
+div.output_area .mglyph > img {
+  max-width: none;
+}
 /* This is needed to protect the pre formating from global settings such
    as that of bootstrap */
 .output {
@@ -749,7 +902,7 @@ div.output_area svg.unconfined {
 }
 div.output_area pre {
   margin: 0;
-  padding: 0;
+  padding: 1px 0 1px 0;
   border: 0;
   vertical-align: baseline;
   color: black;
@@ -871,6 +1024,10 @@ div.output_unrecognized a:hover {
 .rendered_html h6:first-child {
   margin-top: 1em;
 }
+.rendered_html ul:not(.list-inline),
+.rendered_html ol:not(.list-inline) {
+  padding-left: 2em;
+}
 
 
 
@@ -887,16 +1044,24 @@ div.output_unrecognized a:hover {
 }
 
 
+
+
+
 .rendered_html pre,
+
 
 
 
 .rendered_html tr,
 .rendered_html th,
 
-.rendered_html td,
 
-
+.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
 .rendered_html * + table {
   margin-top: 1em;
 }
@@ -912,6 +1077,11 @@ div.output_unrecognized a:hover {
 
 .rendered_html img.unconfined,
 
+
+.rendered_html * + .alert {
+  margin-top: 1em;
+}
+[dir="rtl"] 
 div.text_cell {
   /* Old browsers */
   display: -webkit-box;
@@ -962,8 +1132,15 @@ h6:hover .anchor-link {
   display: none;
 }
 .text_cell.rendered 
+.text_cell.rendered .rendered_html tr,
+.text_cell.rendered .rendered_html th,
+.text_cell.rendered 
 .text_cell.unrendered .text_cell_render {
   display: none;
+}
+.text_cell .dropzone .input_area {
+  border: 2px dashed #bababa;
+  margin: -1px;
 }
 .cm-header-1,
 .cm-header-2,
@@ -1063,47 +1240,8 @@ h6:hover .anchor-link {
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
 .highlight .vm { color: #19177C } /* Name.Variable.Magic */
-.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
-<style type="text/css">
-/* Temporary definitions which will become obsolete with Notebook release 5.0 */
-.ansi-black-fg { color: #3E424D; }
-.ansi-black-bg { background-color: #3E424D; }
-.ansi-black-intense-fg { color: #282C36; }
-.ansi-black-intense-bg { background-color: #282C36; }
-.ansi-red-fg { color: #E75C58; }
-.ansi-red-bg { background-color: #E75C58; }
-.ansi-red-intense-fg { color: #B22B31; }
-.ansi-red-intense-bg { background-color: #B22B31; }
-.ansi-green-fg { color: #00A250; }
-.ansi-green-bg { background-color: #00A250; }
-.ansi-green-intense-fg { color: #007427; }
-.ansi-green-intense-bg { background-color: #007427; }
-.ansi-yellow-fg { color: #DDB62B; }
-.ansi-yellow-bg { background-color: #DDB62B; }
-.ansi-yellow-intense-fg { color: #B27D12; }
-.ansi-yellow-intense-bg { background-color: #B27D12; }
-.ansi-blue-fg { color: #208FFB; }
-.ansi-blue-bg { background-color: #208FFB; }
-.ansi-blue-intense-fg { color: #0065CA; }
-.ansi-blue-intense-bg { background-color: #0065CA; }
-.ansi-magenta-fg { color: #D160C4; }
-.ansi-magenta-bg { background-color: #D160C4; }
-.ansi-magenta-intense-fg { color: #A03196; }
-.ansi-magenta-intense-bg { background-color: #A03196; }
-.ansi-cyan-fg { color: #60C6C8; }
-.ansi-cyan-bg { background-color: #60C6C8; }
-.ansi-cyan-intense-fg { color: #258F8F; }
-.ansi-cyan-intense-bg { background-color: #258F8F; }
-.ansi-white-fg { color: #C5C1B4; }
-.ansi-white-bg { background-color: #C5C1B4; }
-.ansi-white-intense-fg { color: #A1A6B2; }
-.ansi-white-intense-bg { background-color: #A1A6B2; }
-
-.ansi-bold { font-weight: bold; }
-</style>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Pose-clustering-of-docking-results">Pose clustering of docking results<a class="anchor-link" href="#Pose-clustering-of-docking-results">&#182;</a></h1><p>In this Cheminformatics workflow I will show you how to perform a pose clustering from docking experiments (no matter what software they come from). For this workflow I will use RDKIT and the clustering will be based on The Cambridge Crystallographic Data Centre (CCDC) pose clustering analysis described in: (<a href="https://www.ccdc.cam.ac.uk/support-and-resources/ccdcresources/GOLD_User_Guide.pdf">GOLD_user_guide</a>)</p>
 
@@ -1111,8 +1249,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="&#160;Remarks:">&#160;Remarks:<a class="anchor-link" href="#&#160;Remarks:">&#182;</a></h4><p>Pose clustering is based on in place RMS calculation of the molecule poses. However, RDKIT cannot perform in place RMS calculations (yet). Because of that I will need to use another library (for instance Pymol) or calculate the RMS by applying the RMS formula (<a href="https://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions">wikipedia_RMSD</a>).</p>
 <p>For this workflow, I will use both and then I will discuss which is better for this approach (in my opinion).</p>
@@ -1121,8 +1258,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Importing-the-libraries">Importing the libraries<a class="anchor-link" href="#Importing-the-libraries">&#182;</a></h2>
 </div>
@@ -1154,14 +1290,13 @@ h6:hover .anchor-link {
 <span class="kn">from</span> <span class="nn">scipy.cluster.hierarchy</span> <span class="k">import</span> <span class="n">dendrogram</span><span class="p">,</span> <span class="n">linkage</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="In-place-RMS-calculation-using-RDKIT-Maximum-Common-Substructure">In place RMS calculation using RDKIT Maximum Common Substructure<a class="anchor-link" href="#In-place-RMS-calculation-using-RDKIT-Maximum-Common-Substructure">&#182;</a></h2><p>To get the atom mapping of our docking poses we will use the Maximum Common Substructure (<a href="http://rdkit.org/docs/source/rdkit.Chem.MCS.html">MCS</a>) search module from RDKIT. For comparison with other RMS in place method, I will use pymol Rms_cur method (<a href="https://pymolwiki.org/index.php/Rms_cur">Rms_cur</a>).</p>
 
@@ -1169,8 +1304,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Loading-the-poses">Loading the poses<a class="anchor-link" href="#Loading-the-poses">&#182;</a></h3><p>After docking I have a .sdf file for each molecule with 10 poses. I want to compare all my poses</p>
 
@@ -1189,14 +1323,13 @@ h6:hover .anchor-link {
     <span class="n">renamed_poses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let´s take a look to the 3D structures of my poses</p>
 
@@ -1213,7 +1346,7 @@ h6:hover .anchor-link {
 <span class="n">img</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1223,7 +1356,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[3]:</div>
+    <div class="prompt output_prompt">Out[3]:</div>
 
 
 
@@ -1241,16 +1374,14 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="RMS-in-place-calculation">RMS in place calculation<a class="anchor-link" href="#RMS-in-place-calculation">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For an accurate RMS calculation we need to establish the atom pairs that will be used for RMS calculation. For such purpose I will use the MCS.</p>
 <p>The idea of using the MCS is to generate the atom pairs for comparison. This is important, because atom mapping for poses of same molecule can be different in some cases. For instance, if they come from different docking softwares or due to format conversion (e.g. converting output mols from docking using openbabel).</p>
@@ -1296,14 +1427,13 @@ h6:hover .anchor-link {
         <span class="n">table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetProp</span><span class="p">(</span><span class="s1">&#39;_Name&#39;</span><span class="p">),</span><span class="n">jmol</span><span class="o">.</span><span class="n">GetProp</span><span class="p">(</span><span class="s1">&#39;_Name&#39;</span><span class="p">)]</span><span class="o">=</span><span class="n">rmsd</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can find the RMS values of all comparison within the table.</p>
 
@@ -1318,7 +1448,7 @@ h6:hover .anchor-link {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1328,7 +1458,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[5]:</div>
+    <div class="prompt output_prompt">Out[5]:</div>
 
 
 
@@ -1506,8 +1636,7 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And also we can check if our RMS calculation is considering the full molecule, a fragment or substructure.</p>
 
@@ -1526,7 +1655,7 @@ h6:hover .anchor-link {
 <span class="n">structure</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1536,7 +1665,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[6]:</div>
+    <div class="prompt output_prompt">Out[6]:</div>
 
 
 
@@ -1554,8 +1683,7 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Depending in what you want to do, you could be interested in performing an RMS calculation of just a fragment of the molecule. For such purpose you can modify the MCS search to get the atom pairs of the substructure for you are interested.</p>
 <p>E.g.</p>
@@ -1575,7 +1703,7 @@ h6:hover .anchor-link {
 <span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C1=CC2=CC=CN=C2C=C1&#39;</span><span class="p">),</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">250</span><span class="p">))</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1585,7 +1713,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[7]:</div>
 
 
 
@@ -1603,8 +1731,7 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As a comparison, I will run the same RMS calculation but using Pymol instead of the formula</p>
 
@@ -1633,7 +1760,7 @@ h6:hover .anchor-link {
         <span class="n">table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetProp</span><span class="p">(</span><span class="s1">&#39;_Name&#39;</span><span class="p">),</span><span class="n">jmol</span><span class="o">.</span><span class="n">GetProp</span><span class="p">(</span><span class="s1">&#39;_Name&#39;</span><span class="p">)]</span><span class="o">=</span><span class="n">rmsd</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1643,7 +1770,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
@@ -1664,7 +1791,7 @@ h6:hover .anchor-link {
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1674,7 +1801,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[9]:</div>
 
 
 
@@ -1852,8 +1979,7 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As you can see, values from RMS formula and Pymol Rms_cur are the same. However, for this calculation Pymol generates the atom selection by turning on the option <strong>matchmaker=1</strong>. In my experience, when working with poses from different softwares. Pymol Rms_cur can fail even with matchmaker=1. So I would advice to use it carefully and corroborate the RMS values by using the MCS from RDKIT.</p>
 
@@ -1861,8 +1987,7 @@ h6:hover .anchor-link {
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Pose-clustering">Pose clustering<a class="anchor-link" href="#Pose-clustering">&#182;</a></h2><p>As I refer before, this analysis will be based on the GOLD clustering of poses from the CCDC. Therefore, we need to use a complete linkage hierarchical clustering algorithm (HCL). This can be easy doing by typing:</p>
 
@@ -1880,7 +2005,7 @@ h6:hover .anchor-link {
 <span class="c1"># Don´t worry about the warning, the analysis was done</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1890,7 +2015,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 <div class="output_subarea output_stream output_stderr output_text">
@@ -1905,8 +2030,7 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A simple plot of the HCL</p>
 
@@ -1936,7 +2060,7 @@ h6:hover .anchor-link {
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -1946,7 +2070,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -1964,8 +2088,7 @@ h6:hover .anchor-link {
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>For more clearance we will interested in see a heatmap of the poses next to the HCL</p>
 
@@ -1988,14 +2111,13 @@ h6:hover .anchor-link {
         <span class="n">hmap_2</span><span class="p">[</span><span class="n">index</span><span class="p">,</span><span class="n">jndex</span><span class="p">]</span><span class="o">=</span><span class="n">table</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
+</div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And now a super fancy and useful plot</p>
 
@@ -2033,7 +2155,7 @@ h6:hover .anchor-link {
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
-</div>
+    </div>
 </div>
 </div>
 
@@ -2043,7 +2165,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -2056,7 +2178,7 @@ h6:hover .anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+    <div class="prompt"></div>
 
 
 
@@ -2069,6 +2191,19 @@ h6:hover .anchor-link {
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+    </div>
 </div>
 </div>
 
@@ -2107,35 +2242,6 @@ h6:hover .anchor-link {
 
             </div>
             <!-- /.entry-content -->
-    <hr/>
-    <section class="comments" id="comments">
-        <h2>Comments</h2>
-
-        <div id="disqus_thread"></div>
-        <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'chem-workflows'; // required: replace example with your forum shortname
-
-            var disqus_config = function () {
-                this.language = "en";
-
-                        this.page.identifier = '2019-06-24-pose-clustering-of-docking-results';
-            };
-
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function () {
-                var dsq = document.createElement('script');
-                dsq.type = 'text/javascript';
-                dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-        </script>
-        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
-            Disqus.</a></noscript>
-        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-    </section>
         </article>
     </section>
 
@@ -2199,47 +2305,15 @@ h6:hover .anchor-link {
       </div>
    </div>
 </footer>
-<script src="/theme/js/jquery.min.js"></script>
+<script src="www.chem-workflows.com/theme/js/jquery.min.js"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/theme/js/bootstrap.min.js"></script>
+<script src="www.chem-workflows.com/theme/js/bootstrap.min.js"></script>
 
 <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="/theme/js/respond.min.js"></script>
+<script src="www.chem-workflows.com/theme/js/respond.min.js"></script>
 
 
-    <!-- Disqus -->
-    <script type="text/javascript">
-        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-        var disqus_shortname = 'chem-workflows'; // required: replace example with your forum shortname
-
-        /* * * DON'T EDIT BELOW THIS LINE * * */
-        (function () {
-            var s = document.createElement('script');
-            s.async = true;
-            s.type = 'text/javascript';
-            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-        }());
-    </script>
-    <!-- End Disqus Code -->
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-142688706-2']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 
 </body>
