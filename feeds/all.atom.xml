@@ -1117,7 +1117,7 @@ h6:hover .anchor-link {
 &lt;p&gt;The aim of this minitool is not just to visualize the Ramachandran plots but also perform some structural visualization using nglview. Let's put the hands on it.&lt;/p&gt;
 &lt;p&gt;For Ramachandran plots we need the pyRAMA code. Next cell contains such code ready to work directly on jupyter as funtion, but before to run the funtion we need 2 things and they are mandatory.&lt;/p&gt;
 &lt;p&gt;1- The pdb file we want to analyze (from the PDB database or a model that we made).
-2- The rama500- .data files which store the density profiles or occupancies as a grid (download from my github at: )&lt;/p&gt;
+2- The rama500- .data files which store the density profiles or occupancies as a grid (download from my github at: &lt;a href="https://github.com/AngelRuizMoreno/Cheminformatics_workflows_source/blob/master/Others/rama-500.zip"&gt;https://github.com/AngelRuizMoreno/Cheminformatics_workflows_source/blob/master/Others/rama-500.zip&lt;/a&gt; )&lt;/p&gt;
 &lt;p&gt;Now let's run the script&lt;/p&gt;
 
 &lt;/div&gt;
@@ -1345,10 +1345,10 @@ h6:hover .anchor-link {
 
  
  
-&lt;div id="7f6fc623-4282-4832-871f-59033c680bda"&gt;&lt;/div&gt;
+&lt;div id="a9878dbf-fcf5-4fbc-bcb1-460cf75cd2c8"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#7f6fc623-4282-4832-871f-59033c680bda');
+var element = $('#a9878dbf-fcf5-4fbc-bcb1-460cf75cd2c8');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "7a05c77101b94399a27090f8d6f62cf1", "version_major": 2, "version_minor": 0}
@@ -1387,10 +1387,10 @@ var element = $('#7f6fc623-4282-4832-871f-59033c680bda');
 
  
  
-&lt;div id="0d91d828-83e4-49e8-8ba8-cf78d45fcee0"&gt;&lt;/div&gt;
+&lt;div id="4526ef21-6c27-4f18-af01-3324dde2aa51"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#0d91d828-83e4-49e8-8ba8-cf78d45fcee0');
+var element = $('#4526ef21-6c27-4f18-af01-3324dde2aa51');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "4670a070ee094a49b3e92a7d2a71315a", "version_major": 2, "version_minor": 0}
