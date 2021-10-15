@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Cheminformatics Workflows - Mini-tools</title><link href="/" rel="alternate"></link><link href="/feeds/mini-tools.atom.xml" rel="self"></link><id>/</id><updated>2020-03-23T00:00:00-06:00</updated><subtitle></subtitle><entry><title>Building a Multi-Molecule Mol2 reader for RDKit V2</title><link href="/articles/2020/03/23/building-a-multi-molecule-mol2-reader-for-rdkit-v2/" rel="alternate"></link><published>2020-03-23T00:00:00-06:00</published><updated>2020-03-23T00:00:00-06:00</updated><author><name>Angel J. Ruiz Moreno</name></author><id>tag:None,2020-03-23:/articles/2020/03/23/building-a-multi-molecule-mol2-reader-for-rdkit-v2/</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Cheminformatics Workflows - Mini-tools</title><link href="/" rel="alternate"></link><link href="/feeds/mini-tools.atom.xml" rel="self"></link><id>/</id><updated>2020-03-23T00:00:00-06:00</updated><entry><title>Building a Multi-Molecule Mol2 reader for RDKit V2</title><link href="/articles/2020/03/23/building-a-multi-molecule-mol2-reader-for-rdkit-v2/" rel="alternate"></link><published>2020-03-23T00:00:00-06:00</published><updated>2020-03-23T00:00:00-06:00</updated><author><name>Angel J. Ruiz Moreno</name></author><id>tag:None,2020-03-23:/articles/2020/03/23/building-a-multi-molecule-mol2-reader-for-rdkit-v2/</id><summary type="html"></summary><content type="html">&lt;style type="text/css"&gt;/*!
 *
 * IPython notebook
 *
@@ -4721,10 +4721,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
  
  
-&lt;div id="d749a352-7928-42ab-a743-3f606b6a6ff2"&gt;&lt;/div&gt;
+&lt;div id="e8aaf09c-1a01-46b2-946e-442f0178a256"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#d749a352-7928-42ab-a743-3f606b6a6ff2');
+var element = $('#e8aaf09c-1a01-46b2-946e-442f0178a256');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "d8b98eabab624076bdfa0261cd951728", "version_major": 2, "version_minor": 0}
@@ -4763,10 +4763,10 @@ var element = $('#d749a352-7928-42ab-a743-3f606b6a6ff2');
 
  
  
-&lt;div id="93c843c3-9f30-4142-9300-663e2fbe78b1"&gt;&lt;/div&gt;
+&lt;div id="b4df5fda-890f-4db6-843a-5d8e4f427eb7"&gt;&lt;/div&gt;
 &lt;div class="output_subarea output_widget_view "&gt;
 &lt;script type="text/javascript"&gt;
-var element = $('#93c843c3-9f30-4142-9300-663e2fbe78b1');
+var element = $('#b4df5fda-890f-4db6-843a-5d8e4f427eb7');
 &lt;/script&gt;
 &lt;script type="application/vnd.jupyter.widget-view+json"&gt;
 {"model_id": "67c99d23abaf4aa286eac99c1bd69aee", "version_major": 2, "version_minor": 0}
