@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B3SRZ82WR5');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Similarity analysis of compound databases &mdash; Chem-Workflows 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/disqus.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exploring the chemical space by Principal Component Analysis (PCA) and clustering" href="PCA_compounds.html" />
+    <link rel="prev" title="Brief introduction to Molecular Dynamics analysis with MDanalysis" href="MolecularDynamics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+            <a href="../index.html" class="icon icon-home"> Chem-Workflows
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Similarity analysis of compound databases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Importing-the-libraries-we-need">Importing the libraries we need</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Loading-and-visualizing-the-molecules">Loading and visualizing the molecules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Getting-the-fingerprints-for-comparison">Getting the fingerprints for comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#HCL-clustering">HCL clustering</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PCA_compounds.html">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PoseClustering.html">Pose clustering of docking results</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MultiMoleculeMolReader_RDKit.html">Building a Multi-Molecule Mol2 reader for RDKit V2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RamachandranPlots.html">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RetrieveUniprot.html">Retrieve Uniprot data using python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDocking.html">Molecular docking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chem-Workflows</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Similarity analysis of compound databases</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/content/SimilarityAnalysis.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Similarity-analysis-of-compound-databases">
+<h1>Similarity analysis of compound databases<a class="headerlink" href="#Similarity-analysis-of-compound-databases" title="Permalink to this heading"></a></h1>
+<p>In this chem-workflow, I will show you a strategy to calculate the similarity of a molecule database in a straightforward manner.</p>
+<p>For this purpose, I will use a fraction of the REAL Compound Library of Enamine. You can read more about the database <a class="reference external" href="https://enamine.net/library-synthesis/real-compounds/real-compound-libraries">here</a>.</p>
+<p>Despite I will use a SMILES file, this analysis can be performed from SDF codes of molecules or any other format in the same way. Just be sure of using the appropriate supplier for loading your molecules into RDKIT.</p>
+<section id="Importing-the-libraries-we-need">
+<h2>Importing the libraries we need<a class="headerlink" href="#Importing-the-libraries-we-need" title="Permalink to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import gridspec
+
+from rdkit import Chem, DataStructs
+from rdkit.Chem.Fingerprints import FingerprintMols
+from rdkit.Chem import Draw
+
+# All we need for clustering
+from scipy.cluster.hierarchy import dendrogram, linkage
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Loading-and-visualizing-the-molecules">
+<h2>Loading and visualizing the molecules<a class="headerlink" href="#Loading-and-visualizing-the-molecules" title="Permalink to this heading"></a></h2>
+<p>The library contains more than 8 000 000 SMILES codes (size 542.8 M). But we can read the .smiles file as a text file to keep the fist 100 molecules.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># The result of this code will be:
+working_library=[]
+with open(&#39;Enamine_REAL_diversity.smiles&#39;,&#39;r&#39;) as file:
+    for index,line in enumerate(file):
+        if 0&lt;index&lt;=1: # Kee the fist smile code as example
+            print (index, line.split())
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1 [&#39;CC(C)C(C)(C)SCC=CBr&#39;, &#39;PV-002312932038&#39;]
+</pre></div></div>
+</div>
+<p>The result of the above cell is a list which first element (0) is the SMILES codes of the molecule, and the second element (1), the name.</p>
+<p>So, we can use the same code to convert SMILES codes to RDKIT molecules.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>working_library=[]
+with open(&#39;Enamine_REAL_diversity.smiles&#39;,&#39;r&#39;) as file:
+    for index,line in enumerate(file):
+        if 0&lt;index&lt;=100: # Molecules we want (0 is omitted because the fist line (0) of file is the header, not SMILES code)
+            mol=Chem.MolFromSmiles(line.split()[0]) # Converting SMILES codes into rdkit mol
+            mol.SetProp(&#39;_Name&#39;,line.split()[1]) # Adding the name for each molecule
+            working_library.append(mol)
+</pre></div>
+</div>
+</div>
+<p>Now we have a list of 100 RDKIT type molecules to perform our similarity analysis.</p>
+<p>Let´s draw them to see what is inside.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>Draw.MolsToGridImage(working_library,molsPerRow=10,subImgSize=(150,150),legends=[mol.GetProp(&#39;_Name&#39;) for mol in working_library])
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_SimilarityAnalysis_9_0.png" src="../_images/content_SimilarityAnalysis_9_0.png" />
+</div>
+</div>
+</section>
+<section id="Getting-the-fingerprints-for-comparison">
+<h2>Getting the fingerprints for comparison<a class="headerlink" href="#Getting-the-fingerprints-for-comparison" title="Permalink to this heading"></a></h2>
+<p>For fingerprint similarity analysis, we first need to get the fingerprints for each molecule.</p>
+<p>For such purpose we type:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fps= [FingerprintMols.FingerprintMol(mol) for mol in working_library]
+</pre></div>
+</div>
+</div>
+<p>As result we have <em>n fingerprints as n</em> molecules:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(len(working_library))
+print(len(fps))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+100
+100
+</pre></div></div>
+</div>
+<p>And we can get the similarity for each pair of molecules.</p>
+<p>For instance mol_1 as reference and mol_2 as target.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>DataStructs.FingerprintSimilarity(fps[0],fps[1])
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.3438735177865613
+</pre></div></div>
+</div>
+<p>Following the above example, we can construct all vs all analysis to see the similarity within our database (Something similar can be found in another Chem-workflow of this site -<a class="reference external" href="https://chem-workflows.com/articles/2019/06/24/pose-clustering-of-docking-results/">click here to see that entry</a>-)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>size=len(working_library)
+hmap=np.empty(shape=(size,size))
+table=pd.DataFrame()
+for index, i in enumerate(fps):
+    for jndex, j in enumerate(fps):
+        similarity=DataStructs.FingerprintSimilarity(i,j)
+        hmap[index,jndex]=similarity
+        table.loc[working_library[index].GetProp(&#39;_Name&#39;),working_library[jndex].GetProp(&#39;_Name&#39;)]=similarity
+</pre></div>
+</div>
+</div>
+<p>Let´s take a look to the similarity values</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table.head(10) # just the first 10 values due to our table in 100 x 100
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PV-002312932038</th>
+      <th>Z3092470692</th>
+      <th>Z3310927277</th>
+      <th>Z3362561558</th>
+      <th>Z2904173473</th>
+      <th>Z3092410916</th>
+      <th>Z3322438014</th>
+      <th>Z3350500536</th>
+      <th>PV-002106209714</th>
+      <th>Z2790107381</th>
+      <th>...</th>
+      <th>Z3509131770</th>
+      <th>Z3095692355</th>
+      <th>Z3309661778</th>
+      <th>Z3313176794</th>
+      <th>Z2209067032</th>
+      <th>Z3364902924</th>
+      <th>Z3346864116</th>
+      <th>Z3361099331</th>
+      <th>Z2481906035</th>
+      <th>Z3180416352</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>PV-002312932038</th>
+      <td>1.000000</td>
+      <td>0.343874</td>
+      <td>0.342995</td>
+      <td>0.339394</td>
+      <td>0.379845</td>
+      <td>0.342520</td>
+      <td>0.369792</td>
+      <td>0.319588</td>
+      <td>0.282353</td>
+      <td>0.331984</td>
+      <td>...</td>
+      <td>0.324675</td>
+      <td>0.335938</td>
+      <td>0.339844</td>
+      <td>0.324324</td>
+      <td>0.317308</td>
+      <td>0.333333</td>
+      <td>0.294931</td>
+      <td>0.312821</td>
+      <td>0.303922</td>
+      <td>0.335938</td>
+    </tr>
+    <tr>
+      <th>Z3092470692</th>
+      <td>0.343874</td>
+      <td>1.000000</td>
+      <td>0.512712</td>
+      <td>0.307036</td>
+      <td>0.349020</td>
+      <td>0.635063</td>
+      <td>0.428270</td>
+      <td>0.411765</td>
+      <td>0.505882</td>
+      <td>0.395076</td>
+      <td>...</td>
+      <td>0.413333</td>
+      <td>0.257565</td>
+      <td>0.346515</td>
+      <td>0.377399</td>
+      <td>0.453975</td>
+      <td>0.356688</td>
+      <td>0.291557</td>
+      <td>0.410638</td>
+      <td>0.434599</td>
+      <td>0.350902</td>
+    </tr>
+    <tr>
+      <th>Z3310927277</th>
+      <td>0.342995</td>
+      <td>0.512712</td>
+      <td>1.000000</td>
+      <td>0.313480</td>
+      <td>0.362319</td>
+      <td>0.510204</td>
+      <td>0.349162</td>
+      <td>0.369628</td>
+      <td>0.497674</td>
+      <td>0.445676</td>
+      <td>...</td>
+      <td>0.528947</td>
+      <td>0.474227</td>
+      <td>0.494071</td>
+      <td>0.430380</td>
+      <td>0.361413</td>
+      <td>0.369231</td>
+      <td>0.392105</td>
+      <td>0.416918</td>
+      <td>0.380682</td>
+      <td>0.485030</td>
+    </tr>
+    <tr>
+      <th>Z3362561558</th>
+      <td>0.339394</td>
+      <td>0.307036</td>
+      <td>0.313480</td>
+      <td>1.000000</td>
+      <td>0.315789</td>
+      <td>0.317526</td>
+      <td>0.326389</td>
+      <td>0.508000</td>
+      <td>0.456044</td>
+      <td>0.308789</td>
+      <td>...</td>
+      <td>0.371429</td>
+      <td>0.306383</td>
+      <td>0.315261</td>
+      <td>0.409639</td>
+      <td>0.253918</td>
+      <td>0.278810</td>
+      <td>0.300912</td>
+      <td>0.420849</td>
+      <td>0.458333</td>
+      <td>0.309572</td>
+    </tr>
+    <tr>
+      <th>Z2904173473</th>
+      <td>0.379845</td>
+      <td>0.349020</td>
+      <td>0.362319</td>
+      <td>0.315789</td>
+      <td>1.000000</td>
+      <td>0.358268</td>
+      <td>0.335000</td>
+      <td>0.306533</td>
+      <td>0.275862</td>
+      <td>0.348178</td>
+      <td>...</td>
+      <td>0.365639</td>
+      <td>0.351562</td>
+      <td>0.355469</td>
+      <td>0.276923</td>
+      <td>0.305164</td>
+      <td>0.276596</td>
+      <td>0.289593</td>
+      <td>0.306533</td>
+      <td>0.330049</td>
+      <td>0.351562</td>
+    </tr>
+    <tr>
+      <th>Z3092410916</th>
+      <td>0.342520</td>
+      <td>0.635063</td>
+      <td>0.510204</td>
+      <td>0.317526</td>
+      <td>0.358268</td>
+      <td>1.000000</td>
+      <td>0.431772</td>
+      <td>0.424490</td>
+      <td>0.503906</td>
+      <td>0.427624</td>
+      <td>...</td>
+      <td>0.411908</td>
+      <td>0.283253</td>
+      <td>0.384665</td>
+      <td>0.382716</td>
+      <td>0.447791</td>
+      <td>0.362705</td>
+      <td>0.291517</td>
+      <td>0.417695</td>
+      <td>0.446721</td>
+      <td>0.408696</td>
+    </tr>
+    <tr>
+      <th>Z3322438014</th>
+      <td>0.369792</td>
+      <td>0.428270</td>
+      <td>0.349162</td>
+      <td>0.326389</td>
+      <td>0.335000</td>
+      <td>0.431772</td>
+      <td>1.000000</td>
+      <td>0.344512</td>
+      <td>0.454976</td>
+      <td>0.372768</td>
+      <td>...</td>
+      <td>0.360000</td>
+      <td>0.418410</td>
+      <td>0.432271</td>
+      <td>0.421233</td>
+      <td>0.307042</td>
+      <td>0.397260</td>
+      <td>0.344262</td>
+      <td>0.333333</td>
+      <td>0.340299</td>
+      <td>0.414000</td>
+    </tr>
+    <tr>
+      <th>Z3350500536</th>
+      <td>0.319588</td>
+      <td>0.411765</td>
+      <td>0.369628</td>
+      <td>0.508000</td>
+      <td>0.306533</td>
+      <td>0.424490</td>
+      <td>0.344512</td>
+      <td>1.000000</td>
+      <td>0.456311</td>
+      <td>0.389522</td>
+      <td>...</td>
+      <td>0.452830</td>
+      <td>0.419831</td>
+      <td>0.430862</td>
+      <td>0.423611</td>
+      <td>0.307692</td>
+      <td>0.300000</td>
+      <td>0.428152</td>
+      <td>0.418605</td>
+      <td>0.423077</td>
+      <td>0.426829</td>
+    </tr>
+    <tr>
+      <th>PV-002106209714</th>
+      <td>0.282353</td>
+      <td>0.505882</td>
+      <td>0.497674</td>
+      <td>0.456044</td>
+      <td>0.275862</td>
+      <td>0.503906</td>
+      <td>0.454976</td>
+      <td>0.456311</td>
+      <td>1.000000</td>
+      <td>0.504032</td>
+      <td>...</td>
+      <td>0.508621</td>
+      <td>0.513725</td>
+      <td>0.511719</td>
+      <td>0.423645</td>
+      <td>0.514286</td>
+      <td>0.414141</td>
+      <td>0.490826</td>
+      <td>0.538462</td>
+      <td>0.557789</td>
+      <td>0.513725</td>
+    </tr>
+    <tr>
+      <th>Z2790107381</th>
+      <td>0.331984</td>
+      <td>0.395076</td>
+      <td>0.445676</td>
+      <td>0.308789</td>
+      <td>0.348178</td>
+      <td>0.427624</td>
+      <td>0.372768</td>
+      <td>0.389522</td>
+      <td>0.504032</td>
+      <td>1.000000</td>
+      <td>...</td>
+      <td>0.326648</td>
+      <td>0.424028</td>
+      <td>0.465536</td>
+      <td>0.342529</td>
+      <td>0.455172</td>
+      <td>0.360849</td>
+      <td>0.294028</td>
+      <td>0.356659</td>
+      <td>0.410959</td>
+      <td>0.444564</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 100 columns</p>
+</div></div>
+</div>
+<p>We can cluster our compound by similarity applying a linkage hierarchical clustering (HCL) analysis (Something similar can be found in another Chem-workflow of this site -<a class="reference external" href="https://chem-workflows.com/articles/2019/06/24/pose-clustering-of-docking-results/">click here to see that entry</a>-).</p>
+<p>I won´t discuss the different methods for HCL (e.g. single, complete, average, etc). Because literature is plenty of such discussions, for example, you can check the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_linkage_comparison.html">skit-learn documentation</a>.</p>
+</section>
+<section id="HCL-clustering">
+<h2>HCL clustering<a class="headerlink" href="#HCL-clustering" title="Permalink to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>linked = linkage(hmap,&#39;single&#39;)
+labelList = [mol.GetProp(&#39;_Name&#39;) for mol in working_library]
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(8,15))
+
+ax1=plt.subplot()
+o=dendrogram(linked,
+            orientation=&#39;left&#39;,
+            labels=labelList,
+            distance_sort=&#39;descending&#39;,
+            show_leaf_counts=True)
+
+ax1.spines[&#39;left&#39;].set_visible(False)
+ax1.spines[&#39;top&#39;].set_visible(False)
+ax1.spines[&#39;right&#39;].set_visible(False)
+plt.title(&#39;Similarity clustering&#39;,fontsize=20,weight=&#39;bold&#39;)
+plt.tick_params (&#39;both&#39;,width=2,labelsize=8)
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_SimilarityAnalysis_24_0.png" src="../_images/content_SimilarityAnalysis_24_0.png" />
+</div>
+</div>
+<p>Now let´s sort our initial values by the HCL analysis.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># This will give us the clusters in order as the last plot
+new_data=list(reversed(o[&#39;ivl&#39;]))
+
+# we create a new table with the order of HCL
+hmap_2=np.empty(shape=(size,size))
+for index,i in enumerate(new_data):
+    for jndex,j in enumerate(new_data):
+        hmap_2[index,jndex]=table.loc[i].at[j]
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>figure= plt.figure(figsize=(30,30))
+gs1 = gridspec.GridSpec(2,7)
+gs1.update(wspace=0.01)
+ax1 = plt.subplot(gs1[0:-1, :2])
+dendrogram(linked, orientation=&#39;left&#39;, distance_sort=&#39;descending&#39;,show_leaf_counts=True,no_labels=True)
+ax1.spines[&#39;left&#39;].set_visible(False)
+ax1.spines[&#39;top&#39;].set_visible(False)
+ax1.spines[&#39;right&#39;].set_visible(False)
+
+ax2 = plt.subplot(gs1[0:-1,2:6])
+f=ax2.imshow (hmap_2, cmap=&#39;PRGn_r&#39;, interpolation=&#39;nearest&#39;)
+
+ax2.set_title(&#39;Fingerprint Similarity&#39;,fontsize=20,weight=&#39;bold&#39;)
+ax2.set_xticks (range(len(new_data)))
+ax2.set_yticks (range(len(new_data)))
+ax2.set_xticklabels (new_data,rotation=90,size=8)
+ax2.set_yticklabels (new_data,size=8)
+
+ax3 = plt.subplot(gs1[0:-1,6:7])
+m=plt.colorbar(f,cax=ax3,shrink=0.75,orientation=&#39;vertical&#39;,spacing=&#39;uniform&#39;,pad=0.01)
+m.set_label (&#39;Fingerprint Similarity&#39;)
+
+plt.tick_params (&#39;both&#39;,width=2)
+plt.plot()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_SimilarityAnalysis_27_1.png" src="../_images/content_SimilarityAnalysis_27_1.png" />
+</div>
+</div>
+<p>As you can see, our approach was able to identify several clusters based on fingerprint similarity, however. RDKIT can also calculate frequent-used similarity models. For example Tanimoto, Dice, Cosine, Sokal, Russel, Kulczynski, McConnaughey, and Tversky. The implementation is very easy and can be set by doing:</p>
+<p><code class="docutils literal notranslate"><span class="pre">similarity=DataStructs.FingerprintSimilarity(i,j,</span> <span class="pre">metric=DataStructs.DiceSimilarity)</span></code></p>
+<p>where:</p>
+<p>metric - Should be one of the different methods described above.</p>
+<div data-disqus-identifier="Similarity analysis of compound databases" data-disqus-shortname="chem-workflows" id="disqus_thread"></div></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MolecularDynamics.html" class="btn btn-neutral float-left" title="Brief introduction to Molecular Dynamics analysis with MDanalysis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PCA_compounds.html" class="btn btn-neutral float-right" title="Exploring the chemical space by Principal Component Analysis (PCA) and clustering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B3SRZ82WR5', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

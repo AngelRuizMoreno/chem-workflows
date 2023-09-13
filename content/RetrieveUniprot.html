@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B3SRZ82WR5');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Retrieve Uniprot data using python &mdash; Chem-Workflows 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/disqus.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Molecular docking" href="MolecularDocking.html" />
+    <link rel="prev" title="Ramachandran plot (gerdos/PyRAMA engine)" href="RamachandranPlots.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+            <a href="../index.html" class="icon icon-home"> Chem-Workflows
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimilarityAnalysis.html">Similarity analysis of compound databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA_compounds.html">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PoseClustering.html">Pose clustering of docking results</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="MultiMoleculeMolReader_RDKit.html">Building a Multi-Molecule Mol2 reader for RDKit V2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RamachandranPlots.html">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Retrieve Uniprot data using python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#The-python-funtion">The python funtion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#PDB-entry">PDB entry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Uniprot-entry">Uniprot entry</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#Another-examples">Another examples</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Saving-the-table">Saving the table</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDocking.html">Molecular docking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chem-Workflows</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Retrieve Uniprot data using python</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/content/RetrieveUniprot.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Retrieve-Uniprot-data-using-python">
+<h1>Retrieve Uniprot data using python<a class="headerlink" href="#Retrieve-Uniprot-data-using-python" title="Permalink to this heading"></a></h1>
+<p>In this Mini-tool I will show you to retrieve data from Uniprot using a PDB ID or an Uniprot ID directly on python. I wrote this function based on the Uniprot <a class="reference external" href="https://www.uniprot.org/help/api_idmapping">programmatic access for python</a>. Despite in essence is the same idea, I did minor modifications to retrieve the data as a plain text from which would be easier to extract useful data.</p>
+<p>Let’s put the hands on it.</p>
+<section id="The-python-funtion">
+<h2>The python funtion<a class="headerlink" href="#The-python-funtion" title="Permalink to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import urllib
+from bs4 import BeautifulSoup
+
+def get_uniprot (query=&#39;&#39;,query_type=&#39;PDB_ID&#39;):
+    #query_type must be: &quot;PDB_ID&quot; or &quot;ACC&quot;
+    url = &#39;https://www.uniprot.org/uploadlists/&#39; #This is the webser to retrieve the Uniprot data
+    params = {
+    &#39;from&#39;:query_type,
+    &#39;to&#39;:&#39;ACC&#39;,
+    &#39;format&#39;:&#39;txt&#39;,
+    &#39;query&#39;:query
+    }
+
+    data = urllib.parse.urlencode(params)
+    data = data.encode(&#39;ascii&#39;)
+    request = urllib.request.Request(url, data)
+    with urllib.request.urlopen(request) as response:
+        res = response.read()
+        page=BeautifulSoup(res).get_text()
+        page=page.splitlines()
+    return page
+</pre></div>
+</div>
+</div>
+<p>This very simple function will allow us to save Uniprot data for a PDB entry or Uniprot entry into a list</p>
+<section id="PDB-entry">
+<h3>PDB entry<a class="headerlink" href="#PDB-entry" title="Permalink to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x=get_uniprot(query=&#39;1eve&#39;,query_type=&#39;PDB_ID&#39;)
+x[:10] #Just get the first 10 lines of data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;ID   ACES_TETCF              Reviewed;         586 AA.&#39;,
+ &#39;AC   P04058;&#39;,
+ &#39;DT   01-NOV-1986, integrated into UniProtKB/Swiss-Prot.&#39;,
+ &#39;DT   01-JUN-1994, sequence version 2.&#39;,
+ &#39;DT   16-OCT-2019, entry version 170.&#39;,
+ &#39;DE   RecName: Full=Acetylcholinesterase;&#39;,
+ &#39;DE            Short=AChE;&#39;,
+ &#39;DE            EC=3.1.1.7;&#39;,
+ &#39;DE   Flags: Precursor;&#39;,
+ &#39;GN   Name=ache;&#39;]
+</pre></div></div>
+</div>
+</section>
+<section id="Uniprot-entry">
+<h3>Uniprot entry<a class="headerlink" href="#Uniprot-entry" title="Permalink to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y=get_uniprot(query=&#39;P04058&#39;,query_type=&#39;ACC&#39;)
+y[:10] #Just get the first 10 lines of data
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;ID   ACES_TETCF              Reviewed;         586 AA.&#39;,
+ &#39;AC   P04058;&#39;,
+ &#39;DT   01-NOV-1986, integrated into UniProtKB/Swiss-Prot.&#39;,
+ &#39;DT   01-JUN-1994, sequence version 2.&#39;,
+ &#39;DT   16-OCT-2019, entry version 170.&#39;,
+ &#39;DE   RecName: Full=Acetylcholinesterase;&#39;,
+ &#39;DE            Short=AChE;&#39;,
+ &#39;DE            EC=3.1.1.7;&#39;,
+ &#39;DE   Flags: Precursor;&#39;,
+ &#39;GN   Name=ache;&#39;]
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Another-examples">
+<h2>Another examples<a class="headerlink" href="#Another-examples" title="Permalink to this heading"></a></h2>
+<p>Because all the data info is available through a list, it is very easy to find the info that we are interested in, the annotated Gene Ontology for instance.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for line in y:
+    if &#39;DR   GO;&#39; in line:
+        print (line)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+DR   GO; GO:0031225; C:anchored component of membrane; IEA:UniProtKB-KW.
+DR   GO; GO:0030054; C:cell junction; IEA:UniProtKB-KW.
+DR   GO; GO:0005886; C:plasma membrane; IEA:UniProtKB-SubCell.
+DR   GO; GO:0043083; C:synaptic cleft; IEA:GOC.
+DR   GO; GO:0003990; F:acetylcholinesterase activity; IEA:UniProtKB-EC.
+DR   GO; GO:0001507; P:acetylcholine catabolic process in synaptic cleft; IEA:InterPro.
+</pre></div></div>
+</div>
+<p>Or all reported PDB’s for desired protein including experimental methodology, resolution, and length.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>for line in y:
+    if &#39;DR   PDB;&#39; in line:
+        print (line)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+DR   PDB; 1ACJ; X-ray; 2.80 A; A=22-556.
+DR   PDB; 1ACL; X-ray; 2.80 A; A=22-556.
+DR   PDB; 1AMN; X-ray; 2.80 A; A=22-558.
+DR   PDB; 1AX9; X-ray; 2.80 A; A=22-558.
+DR   PDB; 1CFJ; X-ray; 2.60 A; A=22-558.
+DR   PDB; 1DX6; X-ray; 2.30 A; A=22-564.
+DR   PDB; 1E3Q; X-ray; 2.85 A; A=22-564.
+DR   PDB; 1E66; X-ray; 2.10 A; A=22-564.
+DR   PDB; 1EA5; X-ray; 1.80 A; A=22-558.
+DR   PDB; 1EEA; X-ray; 4.50 A; A=22-555.
+DR   PDB; 1EVE; X-ray; 2.50 A; A=22-564.
+DR   PDB; 1FSS; X-ray; 3.00 A; A=22-558.
+DR   PDB; 1GPK; X-ray; 2.10 A; A=22-558.
+DR   PDB; 1GPN; X-ray; 2.35 A; A=22-558.
+DR   PDB; 1GQR; X-ray; 2.20 A; A=25-556.
+DR   PDB; 1GQS; X-ray; 3.00 A; A=25-556.
+DR   PDB; 1H22; X-ray; 2.15 A; A=22-564.
+DR   PDB; 1H23; X-ray; 2.15 A; A=22-564.
+DR   PDB; 1HBJ; X-ray; 2.50 A; A=22-564.
+DR   PDB; 1JGA; Model; -; A=1-586.
+DR   PDB; 1JGB; Model; -; A=1-586.
+DR   PDB; 1JJB; X-ray; 2.30 A; A=25-556.
+DR   PDB; 1OCE; X-ray; 2.70 A; A=22-558.
+DR   PDB; 1ODC; X-ray; 2.20 A; A=22-564.
+DR   PDB; 1QID; X-ray; 2.05 A; A=22-558.
+DR   PDB; 1QIE; X-ray; 2.10 A; A=22-558.
+DR   PDB; 1QIF; X-ray; 2.10 A; A=22-558.
+DR   PDB; 1QIG; X-ray; 2.30 A; A=22-558.
+DR   PDB; 1QIH; X-ray; 2.50 A; A=22-558.
+DR   PDB; 1QII; X-ray; 2.65 A; A=22-558.
+DR   PDB; 1QIJ; X-ray; 2.80 A; A=22-558.
+DR   PDB; 1QIK; X-ray; 2.90 A; A=22-558.
+DR   PDB; 1QIM; X-ray; 3.00 A; A=22-558.
+DR   PDB; 1QTI; X-ray; 2.50 A; A=22-558.
+DR   PDB; 1SOM; X-ray; 2.20 A; A=22-564.
+DR   PDB; 1U65; X-ray; 2.61 A; A=22-564.
+DR   PDB; 1UT6; X-ray; 2.40 A; A=22-556.
+DR   PDB; 1VOT; X-ray; 2.50 A; A=22-558.
+DR   PDB; 1VXO; X-ray; 2.40 A; A=22-558.
+DR   PDB; 1VXR; X-ray; 2.20 A; A=22-558.
+DR   PDB; 1W4L; X-ray; 2.16 A; A=22-564.
+DR   PDB; 1W6R; X-ray; 2.05 A; A=22-564.
+DR   PDB; 1W75; X-ray; 2.40 A; A/B=22-564.
+DR   PDB; 1W76; X-ray; 2.30 A; A/B=22-564.
+DR   PDB; 1ZGB; X-ray; 2.30 A; A=22-564.
+DR   PDB; 1ZGC; X-ray; 2.10 A; A/B=22-564.
+DR   PDB; 2ACE; X-ray; 2.50 A; A=22-558.
+DR   PDB; 2ACK; X-ray; 2.40 A; A=22-558.
+DR   PDB; 2BAG; X-ray; 2.40 A; A=22-564.
+DR   PDB; 2C4H; X-ray; 2.15 A; A=22-558.
+DR   PDB; 2C58; X-ray; 2.30 A; A=22-558.
+DR   PDB; 2C5F; X-ray; 2.60 A; A=22-558.
+DR   PDB; 2C5G; X-ray; 1.95 A; A=22-558.
+DR   PDB; 2CEK; X-ray; 2.20 A; A=22-556.
+DR   PDB; 2CKM; X-ray; 2.15 A; A=22-564.
+DR   PDB; 2CMF; X-ray; 2.50 A; A=22-564.
+DR   PDB; 2DFP; X-ray; 2.30 A; A=23-556.
+DR   PDB; 2J3D; X-ray; 2.60 A; A=22-564.
+DR   PDB; 2J3Q; X-ray; 2.80 A; A=22-564.
+DR   PDB; 2J4F; X-ray; 2.80 A; A=22-564.
+DR   PDB; 2V96; X-ray; 2.40 A; A/B=22-558.
+DR   PDB; 2V97; X-ray; 2.40 A; A/B=22-558.
+DR   PDB; 2V98; X-ray; 3.00 A; A/B=22-558.
+DR   PDB; 2VA9; X-ray; 2.40 A; A/B=22-558.
+DR   PDB; 2VJA; X-ray; 2.30 A; A/B=22-558.
+DR   PDB; 2VJB; X-ray; 2.39 A; A/B=22-558.
+DR   PDB; 2VJC; X-ray; 2.20 A; A/B=22-558.
+DR   PDB; 2VJD; X-ray; 2.30 A; A/B=22-558.
+DR   PDB; 2VQ6; X-ray; 2.71 A; A=22-564.
+DR   PDB; 2VT6; X-ray; 2.40 A; A/B=22-558.
+DR   PDB; 2VT7; X-ray; 2.20 A; A/B=22-558.
+DR   PDB; 2W6C; X-ray; 2.69 A; X=1-586.
+DR   PDB; 2WFZ; X-ray; 1.95 A; A=22-558.
+DR   PDB; 2WG0; X-ray; 2.20 A; A=22-558.
+DR   PDB; 2WG1; X-ray; 2.20 A; A=22-558.
+DR   PDB; 2WG2; X-ray; 1.95 A; A=22-558.
+DR   PDB; 2XI4; X-ray; 2.30 A; A/B=22-558.
+DR   PDB; 3ACE; Model; -; A=22-558.
+DR   PDB; 3GEL; X-ray; 2.39 A; A=25-556.
+DR   PDB; 3I6M; X-ray; 2.26 A; A=23-556.
+DR   PDB; 3I6Z; X-ray; 2.19 A; A=23-556.
+DR   PDB; 3M3D; X-ray; 2.34 A; A=22-564.
+DR   PDB; 3ZV7; X-ray; 2.26 A; A=22-564.
+DR   PDB; 4ACE; Model; -; A=22-558.
+DR   PDB; 4TVK; X-ray; 2.30 A; A=23-556.
+DR   PDB; 4W63; X-ray; 2.80 A; A=23-556.
+DR   PDB; 4X3C; X-ray; 2.60 A; A=23-556.
+DR   PDB; 5BWB; X-ray; 2.57 A; A=22-558.
+DR   PDB; 5BWC; X-ray; 2.45 A; A=22-558.
+DR   PDB; 5DLP; X-ray; 2.70 A; A=22-564.
+DR   PDB; 5E2I; X-ray; 2.65 A; A=25-556.
+DR   PDB; 5E4J; X-ray; 2.54 A; A=25-556.
+DR   PDB; 5E4T; X-ray; 2.43 A; A=22-564.
+DR   PDB; 5EHX; X-ray; 2.10 A; A=25-556.
+DR   PDB; 5EI5; X-ray; 2.10 A; A=23-556.
+DR   PDB; 5IH7; X-ray; 2.40 A; A=23-556.
+DR   PDB; 5NAP; X-ray; 2.17 A; A=22-564.
+DR   PDB; 5NAU; X-ray; 2.25 A; A=22-564.
+DR   PDB; 5NUU; X-ray; 2.50 A; A=22-564.
+DR   PDB; 6EUC; X-ray; 2.22 A; A=25-556.
+DR   PDB; 6EUE; X-ray; 2.00 A; A=24-556.
+DR   PDB; 6EWK; X-ray; 2.22 A; A=25-556.
+DR   PDB; 6EZG; X-ray; 2.20 A; A/B=22-558.
+DR   PDB; 6EZH; X-ray; 2.60 A; A/B=22-558.
+DR   PDB; 6FLD; X-ray; 2.40 A; A=25-556.
+DR   PDB; 6FQN; X-ray; 2.30 A; A=25-556.
+DR   PDB; 6G17; X-ray; 2.20 A; A=22-558.
+DR   PDB; 6G1U; X-ray; 1.79 A; A/B=22-586.
+DR   PDB; 6G1V; X-ray; 1.82 A; A/B=22-586.
+DR   PDB; 6G1W; X-ray; 1.90 A; A/B=22-586.
+DR   PDB; 6G4M; X-ray; 2.63 A; A/B=22-558.
+DR   PDB; 6G4N; X-ray; 2.90 A; A/B=22-558.
+DR   PDB; 6G4O; X-ray; 2.78 A; A/B=22-558.
+DR   PDB; 6G4P; X-ray; 2.83 A; A/B=22-558.
+DR   PDB; 6H12; X-ray; 2.20 A; A/B=22-586.
+DR   PDB; 6H13; X-ray; 2.80 A; A/B=22-586.
+DR   PDB; 6H14; X-ray; 1.86 A; A/B=22-586.
+</pre></div></div>
+</div>
+<p>The main use for which I created this function is to store data of a list of proteins (PDB entries or Uniprot entries) into a single table. For example:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd #To create our table
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>prots=[&#39;P40926&#39;,&#39;O43175&#39;,&#39;Q9UM73&#39;]
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table=pd.DataFrame()
+for index,entry in enumerate(prots):
+    pdbs=[]
+    funtions=[]
+    process=[]
+    organism=[]
+    data=get_uniprot(query=entry,query_type=&#39;ACC&#39;)
+
+    table.loc[index,&#39;Uniprot_entry&#39;]=entry
+
+    for line in data:
+        if &#39;OS   &#39; in line:
+            line=line.strip().replace(&#39;OS   &#39;,&#39;&#39;).replace(&#39;.&#39;,&#39;&#39;)
+            organism.append(line)
+            table.loc[index,&#39;Organism&#39;]=(&quot;, &quot;.join(list(set(organism))))
+
+        if &#39;DR   PDB;&#39; in line:
+            line=line.strip().replace(&#39;DR   &#39;,&#39;&#39;).replace(&#39;;&#39;,&#39;&#39;)
+            pdbs.append ((line.split()[1]+&#39;:&#39;+line.split()[3]))
+            table.loc[index,&#39;PDB:Resol&#39;]=(&quot;, &quot;.join(list(set(pdbs))))
+
+        if &#39;DR   GO; GO:&#39; in line:
+            line=line.strip().replace(&#39;DR   GO; GO:&#39;,&#39;&#39;).replace(&#39;;&#39;,&#39;&#39;).split(&#39;:&#39;)
+            if &#39;F&#39; in line[0]:
+                funtions.append(line[1])
+                table.loc[index,&#39;GO_funtion&#39;]=(&quot;, &quot;.join(list(set(funtions))))
+            else:
+                process.append (line[1])
+                table.loc[index,&#39;GO_process&#39;]=(&quot;, &quot;.join(list(set(process))))
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Uniprot_entry</th>
+      <th>Organism</th>
+      <th>PDB:Resol</th>
+      <th>GO_process</th>
+      <th>GO_funtion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>P40926</td>
+      <td>Homo sapiens (Human)</td>
+      <td>2DFD:1.90, 4WLV:2.40, 4WLF:2.20, 4WLU:2.14, 4W...</td>
+      <td>tricarboxylic acid cycle IBA, aerobic respirat...</td>
+      <td>L-malate dehydrogenase activity IDA, malate de...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>O43175</td>
+      <td>Homo sapiens (Human)</td>
+      <td>6RJ5:1.89, 6RIH:2.15, 6RJ3:1.42, 6RJ2:2.00, 5N...</td>
+      <td>glycine metabolic process IEA, L-serine biosyn...</td>
+      <td>phosphoglycerate dehydrogenase activity IBA, e...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Q9UM73</td>
+      <td>Homo sapiens (Human)</td>
+      <td>3L9P:1.80, 4CMT:1.73, 4FNY:2.45, 5AAB:2.20, 2X...</td>
+      <td>activation of MAPK activity TAS, adult behavio...</td>
+      <td>ATP binding IEA, identical protein binding IPI...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<section id="Saving-the-table">
+<h3>Saving the table<a class="headerlink" href="#Saving-the-table" title="Permalink to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table.to_csv(&#39;Uniprot_search.csv&#39;)
+</pre></div>
+</div>
+</div>
+<div data-disqus-identifier="Retrieve Uniprot data using python" data-disqus-shortname="chem-workflows" id="disqus_thread"></div></section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="RamachandranPlots.html" class="btn btn-neutral float-left" title="Ramachandran plot (gerdos/PyRAMA engine)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MolecularDocking.html" class="btn btn-neutral float-right" title="Molecular docking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B3SRZ82WR5', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

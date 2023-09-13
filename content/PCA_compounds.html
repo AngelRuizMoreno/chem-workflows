@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B3SRZ82WR5');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exploring the chemical space by Principal Component Analysis (PCA) and clustering &mdash; Chem-Workflows 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/disqus.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Pose clustering of docking results" href="PoseClustering.html" />
+    <link rel="prev" title="Similarity analysis of compound databases" href="SimilarityAnalysis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+            <a href="../index.html" class="icon icon-home"> Chem-Workflows
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimilarityAnalysis.html">Similarity analysis of compound databases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Importing-the-libraries-we-will-use">Importing the libraries we will use</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Loading-the-molecules">Loading the molecules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Molecular-descriptors-calculation">Molecular descriptors calculation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)">Principal Component Analysis of calculated molecular descriptors (PCA)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#K-means-clustering-and-main-features-identification">K-means clustering and main features identification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#k-means-clustering">k-means clustering</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Now-everything-together">Now everything together</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PoseClustering.html">Pose clustering of docking results</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MultiMoleculeMolReader_RDKit.html">Building a Multi-Molecule Mol2 reader for RDKit V2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RamachandranPlots.html">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RetrieveUniprot.html">Retrieve Uniprot data using python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDocking.html">Molecular docking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chem-Workflows</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/content/PCA_compounds.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Exploring-the-chemical-space-by-Principal-Component-Analysis-(PCA)-and-clustering">
+<h1>Exploring the chemical space by Principal Component Analysis (PCA) and clustering<a class="headerlink" href="#Exploring-the-chemical-space-by-Principal-Component-Analysis-(PCA)-and-clustering" title="Permalink to this heading"></a></h1>
+<p>In this chem-workflow, I will show you how to analyze compound databases in order to identify shared descriptors (physicochemical properties) among them.</p>
+<p>A server to perform this analysis (or a similar one) is Platform for Unified Molecular Analysis (PUMA).</p>
+<p>For this purpose, I will use a fraction of the REAL Compound Library of Enamine. You can find another example using the same database <a class="reference external" href="https://chem-workflows.com/articles/2019/06/28/similarity-analysis-of-compound-databases/">here</a>.</p>
+<section id="Importing-the-libraries-we-will-use">
+<h2>Importing the libraries we will use<a class="headerlink" href="#Importing-the-libraries-we-will-use" title="Permalink to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import os
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import gridspec
+
+from rdkit import Chem, DataStructs
+from rdkit.Chem import Descriptors,Crippen
+
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+
+import matplotlib.cm as cm
+from sklearn.metrics import silhouette_samples, silhouette_score
+from sklearn.cluster import KMeans
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Loading-the-molecules">
+<h2>Loading the molecules<a class="headerlink" href="#Loading-the-molecules" title="Permalink to this heading"></a></h2>
+<p>The library contains more than 8 000 000 SMILES codes (size 542.8 M). But we can read the .smiles file as a text file to keep the fist 100 molecules in a pandas table.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># The result of this code will be:
+table=pd.DataFrame()
+with open(&#39;Enamine_REAL_diversity.smiles&#39;,&#39;r&#39;) as file:
+    for index,line in enumerate(file):
+        if 0&lt;index&lt;=100:
+            table.loc[index,&#39;SMILES&#39;]=line.split()[0]
+            table.loc[index,&#39;Id&#39;]=line.split()[1]
+</pre></div>
+</div>
+</div>
+<p>Let´s take a look at the first 10 elements of our table of compounds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table.head(10)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SMILES</th>
+      <th>Id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>CC(C)C(C)(C)SCC=CBr</td>
+      <td>PV-002312932038</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CC1CC2(NC(C3CC3C)=NO2)C(C)O1</td>
+      <td>Z3092470692</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BrC=CCN1CC2COC(C2)C1</td>
+      <td>Z3310927277</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CC(C)CC(C)C(C)NCC1(C)CSC1</td>
+      <td>Z3362561558</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CC(C)(C)CS(=O)CC=CCl</td>
+      <td>Z2904173473</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CC(C)(C)C1=NOC2(N1)[C@H]1OC[C@H]3C[C@@H]2C[C@@...</td>
+      <td>Z3092410916</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>BrC=CCNC1CCCC=C1Br</td>
+      <td>Z3322438014</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CC(C)C1CC(NCCC2SCCS2)CN1</td>
+      <td>Z3350500536</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>FCC(CF)NCC1(C(F)F)CC1</td>
+      <td>PV-002106209714</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CC(C(F)F)N1N=C(C(F)(F)F)C(F)C1=O</td>
+      <td>Z2790107381</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Molecular-descriptors-calculation">
+<h2>Molecular descriptors calculation<a class="headerlink" href="#Molecular-descriptors-calculation" title="Permalink to this heading"></a></h2>
+<p>We can use RDKIT to calculate several molecular descriptors (2D and 3D). However, for this example, we will focus on the descriptors measured in the publication: Platform for Unified Molecular Analysis PUMA <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.7b00253">10.1021/acs.jcim.7b00253</a>.</p>
+<p>Moreover, a list of all descriptor that can be calculated using RDKIT can be found <a class="reference external" href="https://www.rdkit.org/docs/GettingStartedInPython.html">here</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># We will calculate the descriptors and add them to our table
+for i in table.index:
+    mol=Chem.MolFromSmiles(table.loc[i,&#39;SMILES&#39;])
+    table.loc[i,&#39;MolWt&#39;]=Descriptors.ExactMolWt (mol)
+    table.loc[i,&#39;TPSA&#39;]=Chem.rdMolDescriptors.CalcTPSA(mol) #Topological Polar Surface Area
+    table.loc[i,&#39;nRotB&#39;]=Descriptors.NumRotatableBonds (mol) #Number of rotable bonds
+    table.loc[i,&#39;HBD&#39;]=Descriptors.NumHDonors(mol) #Number of H bond donors
+    table.loc[i,&#39;HBA&#39;]=Descriptors.NumHAcceptors(mol) #Number of H bond acceptors
+    table.loc[i,&#39;LogP&#39;]=Descriptors.MolLogP(mol) #LogP
+</pre></div>
+</div>
+</div>
+<p>As a result, we will get a table with all descriptors for each molecule (SMILES code).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table.head(10)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SMILES</th>
+      <th>Id</th>
+      <th>MolWt</th>
+      <th>TPSA</th>
+      <th>nRotB</th>
+      <th>HBD</th>
+      <th>HBA</th>
+      <th>LogP</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>CC(C)C(C)(C)SCC=CBr</td>
+      <td>PV-002312932038</td>
+      <td>236.023434</td>
+      <td>0.00</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0628</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CC1CC2(NC(C3CC3C)=NO2)C(C)O1</td>
+      <td>Z3092470692</td>
+      <td>210.136828</td>
+      <td>42.85</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>1.4693</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BrC=CCN1CC2COC(C2)C1</td>
+      <td>Z3310927277</td>
+      <td>231.025876</td>
+      <td>12.47</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.6157</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CC(C)CC(C)C(C)NCC1(C)CSC1</td>
+      <td>Z3362561558</td>
+      <td>229.186421</td>
+      <td>12.03</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.3998</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CC(C)(C)CS(=O)CC=CCl</td>
+      <td>Z2904173473</td>
+      <td>194.053214</td>
+      <td>17.07</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.5337</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CC(C)(C)C1=NOC2(N1)[C@H]1OC[C@H]3C[C@@H]2C[C@@...</td>
+      <td>Z3092410916</td>
+      <td>236.152478</td>
+      <td>42.85</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>1.7169</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>BrC=CCNC1CCCC=C1Br</td>
+      <td>Z3322438014</td>
+      <td>292.941474</td>
+      <td>12.03</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>3.3159</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CC(C)C1CC(NCCC2SCCS2)CN1</td>
+      <td>Z3350500536</td>
+      <td>260.138091</td>
+      <td>24.06</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>2.1587</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>FCC(CF)NCC1(C(F)F)CC1</td>
+      <td>PV-002106209714</td>
+      <td>199.098412</td>
+      <td>12.03</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.9289</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CC(C(F)F)N1N=C(C(F)(F)F)C(F)C1=O</td>
+      <td>Z2790107381</td>
+      <td>248.038432</td>
+      <td>32.67</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.7386</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)">
+<h2>Principal Component Analysis of calculated molecular descriptors (PCA)<a class="headerlink" href="#Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)" title="Permalink to this heading"></a></h2>
+<p>I won´t discuss the basis of PCA due to this site is focused on workflows. However, PCA analysis for different application has been discussed plenty. As a quick reference, you can visit the PCA explanation at <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">Wikipedia</a>.</p>
+<p>For our analysis, we need to select the values of the table that we will use for PCA. Meaning, the descriptors we calculated.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>descriptors = table.loc[:, [&#39;MolWt&#39;, &#39;TPSA&#39;, &#39;nRotB&#39;, &#39;HBD&#39;,&#39;HBA&#39;, &#39;LogP&#39;]].values
+</pre></div>
+</div>
+</div>
+<p>A very important step is performing a standardization of the scales of the descriptors. Scales differences in PCA modify the variance distribution during PCA. More info about this topic can be found <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">here</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>descriptors_std = StandardScaler().fit_transform(descriptors)
+</pre></div>
+</div>
+</div>
+<p>Now, we are ready to calculate the PCA</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pca = PCA()
+descriptors_2d = pca.fit_transform(descriptors_std)
+</pre></div>
+</div>
+</div>
+<p>Let´s add the PCA data to a new table</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>descriptors_pca= pd.DataFrame(descriptors_2d)
+descriptors_pca.index = table.index
+descriptors_pca.columns = [&#39;PC{}&#39;.format(i+1) for i in descriptors_pca.columns]
+descriptors_pca.head(10)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PC1</th>
+      <th>PC2</th>
+      <th>PC3</th>
+      <th>PC4</th>
+      <th>PC5</th>
+      <th>PC6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>-2.463784</td>
+      <td>-0.936078</td>
+      <td>-0.274030</td>
+      <td>0.558761</td>
+      <td>-0.063431</td>
+      <td>0.131835</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.075200</td>
+      <td>1.908703</td>
+      <td>-0.534952</td>
+      <td>0.042434</td>
+      <td>-0.559363</td>
+      <td>-0.252494</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.477081</td>
+      <td>0.865532</td>
+      <td>-1.070530</td>
+      <td>-0.451302</td>
+      <td>0.453224</td>
+      <td>-0.201938</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.526756</td>
+      <td>-0.336039</td>
+      <td>1.094536</td>
+      <td>0.286876</td>
+      <td>-0.170061</td>
+      <td>-0.175008</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-2.147808</td>
+      <td>0.475692</td>
+      <td>-0.564722</td>
+      <td>-0.344079</td>
+      <td>-0.139551</td>
+      <td>0.425832</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.066967</td>
+      <td>1.802380</td>
+      <td>-0.849193</td>
+      <td>0.543555</td>
+      <td>-0.370788</td>
+      <td>-0.232141</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>-1.384515</td>
+      <td>-0.041261</td>
+      <td>0.202822</td>
+      <td>1.299544</td>
+      <td>0.823427</td>
+      <td>0.123817</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.083638</td>
+      <td>0.888434</td>
+      <td>1.430529</td>
+      <td>0.522356</td>
+      <td>0.088537</td>
+      <td>-0.931776</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-1.817628</td>
+      <td>0.741035</td>
+      <td>1.132660</td>
+      <td>-0.646553</td>
+      <td>0.332754</td>
+      <td>-0.019503</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-0.899886</td>
+      <td>0.776893</td>
+      <td>-1.091563</td>
+      <td>-0.339891</td>
+      <td>0.401541</td>
+      <td>0.382843</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>We can check the explained variance to see the variance explained by each component from PCA</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(pca.explained_variance_ratio_)
+print(sum(pca.explained_variance_ratio_))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[0.42278681 0.30201227 0.14303101 0.08478587 0.03041105 0.01697299]
+1.0
+</pre></div></div>
+</div>
+<p>And also, we can plot such data</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.rcParams[&#39;axes.linewidth&#39;] = 1.5
+plt.figure(figsize=(8,6))
+fig, ax = plt.subplots(figsize=(8,6))
+
+var=np.cumsum(np.round(pca.explained_variance_ratio_, decimals=3)*100)
+plt.plot([i+1 for i in range(len(var))],var,&#39;k-&#39;,linewidth=2)
+plt.xticks([i+1 for i in range(len(var))])
+plt.ylabel(&#39;% Variance Explained&#39;,fontsize=16,fontweight=&#39;bold&#39;)
+plt.xlabel(&#39;Pincipal Component (PC)&#39;,fontsize=16,fontweight=&#39;bold&#39;)
+ax.spines[&#39;top&#39;].set_visible(False)
+ax.spines[&#39;right&#39;].set_visible(False)
+plt.tight_layout()
+plt.tick_params (&#39;both&#39;,width=2,labelsize=12)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Figure size 576x432 with 0 Axes&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_22_1.png" src="../_images/content_PCA_compounds_22_1.png" />
+</div>
+</div>
+<p>As you can see, the PC1 and PC2 explain 72.4 % of the variability. So we can plot PC1 vs PC2 to see the distribution of our compounds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = plt.figure(figsize=(8,6))
+ax = fig.add_subplot(111)
+
+ax.plot(descriptors_pca[&#39;PC1&#39;],descriptors_pca[&#39;PC2&#39;],&#39;o&#39;,color=&#39;k&#39;)
+ax.set_title (&#39;Principal Component Analysis&#39;,fontsize=16,fontweight=&#39;bold&#39;,family=&#39;sans-serif&#39;)
+ax.set_xlabel (&#39;PC1&#39;,fontsize=14,fontweight=&#39;bold&#39;)
+ax.set_ylabel (&#39;PC2&#39;,fontsize=14,fontweight=&#39;bold&#39;)
+
+plt.tick_params (&#39;both&#39;,width=2,labelsize=12)
+
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_24_0.png" src="../_images/content_PCA_compounds_24_0.png" />
+</div>
+</div>
+<p>However, this plot is simple and we cannot identify compound clusters easily. For such purpose, we can perform clustering analysis using the PCA values to identify compound groups by mathematical approaches. Moreover, PC1 vs PC2 (or any other combination) won´t give us information about which feature (descriptor) is more important to explain the variance of our values.</p>
+<p>For this example, we will identify the most important feature (descriptor), and we identify compound clusters by the k-means clustering algorithm. For more info about k-means, you can look at <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">skit-learn</a>.</p>
+</section>
+<section id="K-means-clustering-and-main-features-identification">
+<h2>K-means clustering and main features identification<a class="headerlink" href="#K-means-clustering-and-main-features-identification" title="Permalink to this heading"></a></h2>
+<p>The first step for this analysis is to re-scale our PCA values from -1 to 1. This because we want to analyze our data inside of the covariance cycle of the features (descriptors). Fur such purpose we type:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># This normalization will be performed just for PC1 and PC2, but can be done for all the components.
+scale1 = 1.0/(max(descriptors_pca[&#39;PC1&#39;]) - min(descriptors_pca[&#39;PC1&#39;]))
+scale2 = 1.0/(max(descriptors_pca[&#39;PC2&#39;]) - min(descriptors_pca[&#39;PC2&#39;]))
+
+# And we add the new values to our PCA table
+descriptors_pca[&#39;PC1_normalized&#39;]=[i*scale1 for i in descriptors_pca[&#39;PC1&#39;]]
+descriptors_pca[&#39;PC2_normalized&#39;]=[i*scale2 for i in descriptors_pca[&#39;PC2&#39;]]
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>descriptors_pca.head(10)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PC1</th>
+      <th>PC2</th>
+      <th>PC3</th>
+      <th>PC4</th>
+      <th>PC5</th>
+      <th>PC6</th>
+      <th>PC1_normalized</th>
+      <th>PC2_normalized</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>-2.463784</td>
+      <td>-0.936078</td>
+      <td>-0.274030</td>
+      <td>0.558761</td>
+      <td>-0.063431</td>
+      <td>0.131835</td>
+      <td>-0.395072</td>
+      <td>-0.139342</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.075200</td>
+      <td>1.908703</td>
+      <td>-0.534952</td>
+      <td>0.042434</td>
+      <td>-0.559363</td>
+      <td>-0.252494</td>
+      <td>-0.012058</td>
+      <td>0.284125</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.477081</td>
+      <td>0.865532</td>
+      <td>-1.070530</td>
+      <td>-0.451302</td>
+      <td>0.453224</td>
+      <td>-0.201938</td>
+      <td>-0.236852</td>
+      <td>0.128841</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.526756</td>
+      <td>-0.336039</td>
+      <td>1.094536</td>
+      <td>0.286876</td>
+      <td>-0.170061</td>
+      <td>-0.175008</td>
+      <td>-0.244818</td>
+      <td>-0.050022</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-2.147808</td>
+      <td>0.475692</td>
+      <td>-0.564722</td>
+      <td>-0.344079</td>
+      <td>-0.139551</td>
+      <td>0.425832</td>
+      <td>-0.344405</td>
+      <td>0.070810</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.066967</td>
+      <td>1.802380</td>
+      <td>-0.849193</td>
+      <td>0.543555</td>
+      <td>-0.370788</td>
+      <td>-0.232141</td>
+      <td>0.010738</td>
+      <td>0.268298</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>-1.384515</td>
+      <td>-0.041261</td>
+      <td>0.202822</td>
+      <td>1.299544</td>
+      <td>0.823427</td>
+      <td>0.123817</td>
+      <td>-0.222009</td>
+      <td>-0.006142</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.083638</td>
+      <td>0.888434</td>
+      <td>1.430529</td>
+      <td>0.522356</td>
+      <td>0.088537</td>
+      <td>-0.931776</td>
+      <td>0.013412</td>
+      <td>0.132250</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-1.817628</td>
+      <td>0.741035</td>
+      <td>1.132660</td>
+      <td>-0.646553</td>
+      <td>0.332754</td>
+      <td>-0.019503</td>
+      <td>-0.291460</td>
+      <td>0.110309</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-0.899886</td>
+      <td>0.776893</td>
+      <td>-1.091563</td>
+      <td>-0.339891</td>
+      <td>0.401541</td>
+      <td>0.382843</td>
+      <td>-0.144298</td>
+      <td>0.115646</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>fig = plt.figure(figsize=(8,6))
+ax = fig.add_subplot(111)
+
+ax.plot(descriptors_pca[&#39;PC1_normalized&#39;],descriptors_pca[&#39;PC2_normalized&#39;],&#39;o&#39;,color=&#39;k&#39;)
+ax.set_title (&#39;Principal Component Analysis&#39;,fontsize=16,fontweight=&#39;bold&#39;,family=&#39;sans-serif&#39;)
+ax.set_xlabel (&#39;PC1&#39;,fontsize=14,fontweight=&#39;bold&#39;)
+ax.set_ylabel (&#39;PC2&#39;,fontsize=14,fontweight=&#39;bold&#39;)
+
+plt.tick_params (&#39;both&#39;,width=2,labelsize=12)
+
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_29_0.png" src="../_images/content_PCA_compounds_29_0.png" />
+</div>
+</div>
+<p>As you can see, the distribution of the points is the same as before, however, the scale now is from -1 to 1.</p>
+<section id="k-means-clustering">
+<h3>k-means clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading"></a></h3>
+<p>K-means clustering is an algorithm in which the user must define the number of clusters. However, in order to mathematically select a number of clusters for a group of points based on distribution, different algorithms can be applied. For instance, we will use the silhouette-based algorithm to identify the best number of clusters for our distribution. More info about silhouette algorithm can be found
+<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html">here</a> and <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html">here</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>range_n_clusters = [2, 3, 4, 5, 6, 7,8,9,10]
+for n_clusters in range_n_clusters:
+    fig, (ax1,ax2)= plt.subplots(1, 2)
+    fig.set_size_inches(8, 4)
+
+    kmeans = KMeans(n_clusters=n_clusters, random_state=10)
+    cluster_labels = kmeans.fit_predict(descriptors_pca[[&#39;PC1_normalized&#39;,&#39;PC2_normalized&#39;]])
+    silhouette_avg = silhouette_score(descriptors_pca[[&#39;PC1_normalized&#39;,&#39;PC2_normalized&#39;]], cluster_labels)
+    print(&quot;For n_clusters =&quot;, n_clusters,
+          &quot;The average silhouette_score is :&quot;, silhouette_avg)
+
+    sample_silhouette_values = silhouette_samples(descriptors_pca[[&#39;PC1_normalized&#39;,&#39;PC2_normalized&#39;]], cluster_labels)
+
+    y_lower = 10
+
+    for i in range(n_clusters):
+        # Aggregate the silhouette scores for samples belonging to
+        # cluster i, and sort them
+        ith_cluster_silhouette_values = \
+            sample_silhouette_values[cluster_labels == i]
+
+        ith_cluster_silhouette_values.sort()
+
+        size_cluster_i = ith_cluster_silhouette_values.shape[0]
+        y_upper = y_lower + size_cluster_i
+
+        color = cm.nipy_spectral(float(i) / n_clusters)
+        ax1.fill_betweenx(np.arange(y_lower, y_upper),
+                          0, ith_cluster_silhouette_values,
+                          facecolor=color, edgecolor=color, alpha=0.7)
+
+        # Label the silhouette plots with their cluster numbers at the middle
+        ax1.text(-0.05, y_lower + 0.5 * size_cluster_i, str(i))
+
+        # Compute the new y_lower for next plot
+        y_lower = y_upper + 10  # 10 for the 0 samples
+
+    ax1.set_title(&quot;The silhouette plot for the various clusters.&quot;)
+    ax1.set_xlabel(&quot;The silhouette coefficient values&quot;)
+    ax1.set_ylabel(&quot;Cluster label&quot;)
+
+    # The vertical line for average silhouette score of all the values
+    ax1.axvline(x=silhouette_avg, color=&quot;red&quot;, linestyle=&quot;--&quot;)
+
+
+    # 2nd Plot showing the actual clusters formed
+    colors = cm.nipy_spectral(cluster_labels.astype(float) / n_clusters)
+    ax2.scatter(descriptors_pca[&#39;PC1_normalized&#39;], descriptors_pca[&#39;PC2_normalized&#39;],
+                marker=&#39;.&#39;, s=30, lw=0, alpha=0.7,c=colors, edgecolor=&#39;k&#39;)
+
+
+    # Labeling the clusters
+    centers = kmeans.cluster_centers_
+    # Draw white circles at cluster centers
+    ax2.scatter(centers[:, 0], centers[:, 1], marker=&#39;o&#39;,
+                c=&quot;white&quot;, alpha=1, s=200, edgecolor=&#39;k&#39;)
+
+    for i, c in enumerate(centers):
+        ax2.scatter(c[0], c[1], marker=&#39;$%d$&#39; % i, alpha=1,
+                    s=50, edgecolor=&#39;k&#39;)
+
+    ax2.set_title(&quot;The visualization of the clustered data.&quot;)
+    ax2.set_xlabel(&quot;PC1&quot;)
+    ax2.set_ylabel(&quot;PC2&quot;)
+
+    plt.suptitle((&quot;Silhouette analysis for KMeans clustering on sample data &quot;
+                  &quot;with n_clusters = %d&quot; % n_clusters),
+                 fontsize=14, fontweight=&#39;bold&#39;)
+
+
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+For n_clusters = 2 The average silhouette_score is : 0.4084228227138712
+For n_clusters = 3 The average silhouette_score is : 0.45489833249431
+For n_clusters = 4 The average silhouette_score is : 0.4241945808059022
+For n_clusters = 5 The average silhouette_score is : 0.4131292685513735
+For n_clusters = 6 The average silhouette_score is : 0.39907782063536723
+For n_clusters = 7 The average silhouette_score is : 0.3523945319600729
+For n_clusters = 8 The average silhouette_score is : 0.3906505698840795
+For n_clusters = 9 The average silhouette_score is : 0.4003463850492715
+For n_clusters = 10 The average silhouette_score is : 0.384264972688578
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_1.png" src="../_images/content_PCA_compounds_32_1.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_2.png" src="../_images/content_PCA_compounds_32_2.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_3.png" src="../_images/content_PCA_compounds_32_3.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_4.png" src="../_images/content_PCA_compounds_32_4.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_5.png" src="../_images/content_PCA_compounds_32_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_6.png" src="../_images/content_PCA_compounds_32_6.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_7.png" src="../_images/content_PCA_compounds_32_7.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_8.png" src="../_images/content_PCA_compounds_32_8.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_32_9.png" src="../_images/content_PCA_compounds_32_9.png" />
+</div>
+</div>
+<p>As higher the silhouette_score the better cluster distribution. Then, for our data:</p>
+<p>For n_clusters = 3 The average silhouette_score is : 0.45489833249431</p>
+<p>3 clusters are the best for our data distribution. So, let´s use such number of clusters.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>kmeans = KMeans(n_clusters=3, random_state=10) # We define the best number of clusters
+clusters = kmeans.fit(descriptors_pca[[&#39;PC1_normalized&#39;,&#39;PC2_normalized&#39;]]) #PC1 vs PC2 (normalized values)
+</pre></div>
+</div>
+</div>
+<p>Once the calculation of clusters is done, we can add the result to our PCA table.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>descriptors_pca[&#39;Cluster_PC1_PC2&#39;] = pd.Series(clusters.labels_, index=table.index)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>descriptors_pca.head(10)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PC1</th>
+      <th>PC2</th>
+      <th>PC3</th>
+      <th>PC4</th>
+      <th>PC5</th>
+      <th>PC6</th>
+      <th>PC1_normalized</th>
+      <th>PC2_normalized</th>
+      <th>Cluster_PC1_PC2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>-2.463784</td>
+      <td>-0.936078</td>
+      <td>-0.274030</td>
+      <td>0.558761</td>
+      <td>-0.063431</td>
+      <td>0.131835</td>
+      <td>-0.395072</td>
+      <td>-0.139342</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-0.075200</td>
+      <td>1.908703</td>
+      <td>-0.534952</td>
+      <td>0.042434</td>
+      <td>-0.559363</td>
+      <td>-0.252494</td>
+      <td>-0.012058</td>
+      <td>0.284125</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-1.477081</td>
+      <td>0.865532</td>
+      <td>-1.070530</td>
+      <td>-0.451302</td>
+      <td>0.453224</td>
+      <td>-0.201938</td>
+      <td>-0.236852</td>
+      <td>0.128841</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-1.526756</td>
+      <td>-0.336039</td>
+      <td>1.094536</td>
+      <td>0.286876</td>
+      <td>-0.170061</td>
+      <td>-0.175008</td>
+      <td>-0.244818</td>
+      <td>-0.050022</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-2.147808</td>
+      <td>0.475692</td>
+      <td>-0.564722</td>
+      <td>-0.344079</td>
+      <td>-0.139551</td>
+      <td>0.425832</td>
+      <td>-0.344405</td>
+      <td>0.070810</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.066967</td>
+      <td>1.802380</td>
+      <td>-0.849193</td>
+      <td>0.543555</td>
+      <td>-0.370788</td>
+      <td>-0.232141</td>
+      <td>0.010738</td>
+      <td>0.268298</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>-1.384515</td>
+      <td>-0.041261</td>
+      <td>0.202822</td>
+      <td>1.299544</td>
+      <td>0.823427</td>
+      <td>0.123817</td>
+      <td>-0.222009</td>
+      <td>-0.006142</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.083638</td>
+      <td>0.888434</td>
+      <td>1.430529</td>
+      <td>0.522356</td>
+      <td>0.088537</td>
+      <td>-0.931776</td>
+      <td>0.013412</td>
+      <td>0.132250</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>-1.817628</td>
+      <td>0.741035</td>
+      <td>1.132660</td>
+      <td>-0.646553</td>
+      <td>0.332754</td>
+      <td>-0.019503</td>
+      <td>-0.291460</td>
+      <td>0.110309</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>-0.899886</td>
+      <td>0.776893</td>
+      <td>-1.091563</td>
+      <td>-0.339891</td>
+      <td>0.401541</td>
+      <td>0.382843</td>
+      <td>-0.144298</td>
+      <td>0.115646</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<section id="Now-everything-together">
+<h4>Now everything together<a class="headerlink" href="#Now-everything-together" title="Permalink to this heading"></a></h4>
+<p>We will plot PC1 vs PC2 data. Each cluster will have a different color, and we will find the main feature for each principal component.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.rcParams[&#39;axes.linewidth&#39;] = 1.5
+plt.figure(figsize=(10,8))
+
+fig, ax = plt.subplots(figsize=(7,7))
+
+color_code={ 0:        &#39;magenta&#39;,\
+             1.0:   &#39;orange&#39;,\
+             2.0:      &#39;cyan&#39;,\
+             3.0:           &#39;c&#39;,\
+             4.0:        &#39;m&#39;,\
+             5.0:        &#39;y&#39;,\
+             6.0:        &#39;darkorange&#39;,
+             7.0:       &#39;k&#39;,
+             }
+
+for i in descriptors_pca.index:
+        ax.plot(descriptors_pca.loc[i].at[&#39;PC1_normalized&#39;],descriptors_pca.loc[i].at[&#39;PC2_normalized&#39;],
+                    c=color_code[descriptors_pca.loc[i].at[&#39;Cluster_PC1_PC2&#39;]],
+                    marker=&#39;o&#39;,markersize=8,markeredgecolor=&#39;k&#39;,alpha=0.3)
+
+
+plt.xlabel (&#39;PC1&#39;,fontsize=14,fontweight=&#39;bold&#39;)
+ax.xaxis.set_label_coords(0.98, 0.45)
+plt.ylabel (&#39;PC2&#39;,fontsize=14,fontweight=&#39;bold&#39;)
+ax.yaxis.set_label_coords(0.45, 0.98)
+plt.tick_params (&#39;both&#39;,width=2,labelsize=12)
+ax.spines[&#39;left&#39;].set_position((&#39;data&#39;, 0))
+ax.spines[&#39;bottom&#39;].set_position((&#39;data&#39;, 0))
+ax.spines[&#39;top&#39;].set_visible(False)
+ax.spines[&#39;right&#39;].set_visible(False)
+
+lab=[&#39;MolWt&#39;, &#39;TPSA&#39;, &#39;nRotB&#39;, &#39;HBD&#39;,&#39;HBA&#39;, &#39;LogP&#39;] #Feature labels
+
+l=np.transpose(pca.components_[0:2, :]) ## We will get the components eigenvectors (main features) for PC1 and PC2
+
+n = l.shape[0]
+for i in range(n):
+    plt.arrow(0, 0, l[i,0], l[i,1],color= &#39;k&#39;,alpha=0.6,linewidth=1.2,head_width=0.025)
+    plt.text(l[i,0]*1.25, l[i,1]*1.25, lab[i], color = &#39;k&#39;,va = &#39;center&#39;, ha = &#39;center&#39;,fontsize=11)
+
+circle = plt.Circle((0,0), 1, color=&#39;gray&#39;, fill=False,clip_on=True,linewidth=1.5,linestyle=&#39;--&#39;)
+ax.add_artist(circle)
+plt.xlim(-1.2,1.2)
+plt.ylim(-1.2,1.2)
+plt.tight_layout()
+plt.show()
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Figure size 720x576 with 0 Axes&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_PCA_compounds_39_1.png" src="../_images/content_PCA_compounds_39_1.png" />
+</div>
+</div>
+<p>As a result, we can identify the features that correlate positively and negatively with PC1 (TPSA, HBA, MolWt), and with PC2 (HBD, nRotB, LogP). Additionally, we can see that LogP is the “most important” feature (descriptor) because of the vector length. And also we can see the 3 different clusters we identified by the silhouette-based algorithm.</p>
+<p>Finally, we can merge our tables to keep the data in a single table or file.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table=table.join(descriptors_pca)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table.head(10)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SMILES</th>
+      <th>Id</th>
+      <th>MolWt</th>
+      <th>TPSA</th>
+      <th>nRotB</th>
+      <th>HBD</th>
+      <th>HBA</th>
+      <th>LogP</th>
+      <th>PC1</th>
+      <th>PC2</th>
+      <th>PC3</th>
+      <th>PC4</th>
+      <th>PC5</th>
+      <th>PC6</th>
+      <th>PC1_normalized</th>
+      <th>PC2_normalized</th>
+      <th>Cluster_PC1_PC2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>CC(C)C(C)(C)SCC=CBr</td>
+      <td>PV-002312932038</td>
+      <td>236.023434</td>
+      <td>0.00</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0628</td>
+      <td>-2.463784</td>
+      <td>-0.936078</td>
+      <td>-0.274030</td>
+      <td>0.558761</td>
+      <td>-0.063431</td>
+      <td>0.131835</td>
+      <td>-0.395072</td>
+      <td>-0.139342</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>CC1CC2(NC(C3CC3C)=NO2)C(C)O1</td>
+      <td>Z3092470692</td>
+      <td>210.136828</td>
+      <td>42.85</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>1.4693</td>
+      <td>-0.075200</td>
+      <td>1.908703</td>
+      <td>-0.534952</td>
+      <td>0.042434</td>
+      <td>-0.559363</td>
+      <td>-0.252494</td>
+      <td>-0.012058</td>
+      <td>0.284125</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>BrC=CCN1CC2COC(C2)C1</td>
+      <td>Z3310927277</td>
+      <td>231.025876</td>
+      <td>12.47</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.6157</td>
+      <td>-1.477081</td>
+      <td>0.865532</td>
+      <td>-1.070530</td>
+      <td>-0.451302</td>
+      <td>0.453224</td>
+      <td>-0.201938</td>
+      <td>-0.236852</td>
+      <td>0.128841</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>CC(C)CC(C)C(C)NCC1(C)CSC1</td>
+      <td>Z3362561558</td>
+      <td>229.186421</td>
+      <td>12.03</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>3.3998</td>
+      <td>-1.526756</td>
+      <td>-0.336039</td>
+      <td>1.094536</td>
+      <td>0.286876</td>
+      <td>-0.170061</td>
+      <td>-0.175008</td>
+      <td>-0.244818</td>
+      <td>-0.050022</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CC(C)(C)CS(=O)CC=CCl</td>
+      <td>Z2904173473</td>
+      <td>194.053214</td>
+      <td>17.07</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>2.5337</td>
+      <td>-2.147808</td>
+      <td>0.475692</td>
+      <td>-0.564722</td>
+      <td>-0.344079</td>
+      <td>-0.139551</td>
+      <td>0.425832</td>
+      <td>-0.344405</td>
+      <td>0.070810</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>CC(C)(C)C1=NOC2(N1)[C@H]1OC[C@H]3C[C@@H]2C[C@@...</td>
+      <td>Z3092410916</td>
+      <td>236.152478</td>
+      <td>42.85</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>4.0</td>
+      <td>1.7169</td>
+      <td>0.066967</td>
+      <td>1.802380</td>
+      <td>-0.849193</td>
+      <td>0.543555</td>
+      <td>-0.370788</td>
+      <td>-0.232141</td>
+      <td>0.010738</td>
+      <td>0.268298</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>BrC=CCNC1CCCC=C1Br</td>
+      <td>Z3322438014</td>
+      <td>292.941474</td>
+      <td>12.03</td>
+      <td>3.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>3.3159</td>
+      <td>-1.384515</td>
+      <td>-0.041261</td>
+      <td>0.202822</td>
+      <td>1.299544</td>
+      <td>0.823427</td>
+      <td>0.123817</td>
+      <td>-0.222009</td>
+      <td>-0.006142</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>CC(C)C1CC(NCCC2SCCS2)CN1</td>
+      <td>Z3350500536</td>
+      <td>260.138091</td>
+      <td>24.06</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>4.0</td>
+      <td>2.1587</td>
+      <td>0.083638</td>
+      <td>0.888434</td>
+      <td>1.430529</td>
+      <td>0.522356</td>
+      <td>0.088537</td>
+      <td>-0.931776</td>
+      <td>0.013412</td>
+      <td>0.132250</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>FCC(CF)NCC1(C(F)F)CC1</td>
+      <td>PV-002106209714</td>
+      <td>199.098412</td>
+      <td>12.03</td>
+      <td>6.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.9289</td>
+      <td>-1.817628</td>
+      <td>0.741035</td>
+      <td>1.132660</td>
+      <td>-0.646553</td>
+      <td>0.332754</td>
+      <td>-0.019503</td>
+      <td>-0.291460</td>
+      <td>0.110309</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>CC(C(F)F)N1N=C(C(F)(F)F)C(F)C1=O</td>
+      <td>Z2790107381</td>
+      <td>248.038432</td>
+      <td>32.67</td>
+      <td>2.0</td>
+      <td>0.0</td>
+      <td>2.0</td>
+      <td>1.7386</td>
+      <td>-0.899886</td>
+      <td>0.776893</td>
+      <td>-1.091563</td>
+      <td>-0.339891</td>
+      <td>0.401541</td>
+      <td>0.382843</td>
+      <td>-0.144298</td>
+      <td>0.115646</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Saving values from a pandas table to a .csv file is very easy. You just need to type:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>table.to_csv(&#39;file_name.csv&#39;)
+</pre></div>
+</div>
+<div data-disqus-identifier="Exploring the chemical space by Principal Component Analysis (PCA) and clustering" data-disqus-shortname="chem-workflows" id="disqus_thread"></div></section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SimilarityAnalysis.html" class="btn btn-neutral float-left" title="Similarity analysis of compound databases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="PoseClustering.html" class="btn btn-neutral float-right" title="Pose clustering of docking results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B3SRZ82WR5', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

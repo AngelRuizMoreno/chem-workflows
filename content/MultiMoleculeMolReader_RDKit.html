@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B3SRZ82WR5');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building a Multi-Molecule Mol2 reader for RDKit V2 &mdash; Chem-Workflows 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/disqus.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Ramachandran plot (gerdos/PyRAMA engine)" href="RamachandranPlots.html" />
+    <link rel="prev" title="Pose clustering of docking results" href="PoseClustering.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+            <a href="../index.html" class="icon icon-home"> Chem-Workflows
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimilarityAnalysis.html">Similarity analysis of compound databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA_compounds.html">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PoseClustering.html">Pose clustering of docking results</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building a Multi-Molecule Mol2 reader for RDKit V2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Importing-the-libraries">Importing the libraries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#As-you-can-see,-the-functionality-of-this-library-is-similar-to-the-previous-one.-I-would-strongly-recommend-using-this-version-instead-of-the-previous-one-to-avoid-several-errors.">As you can see, the functionality of this library is similar to the previous one. I would strongly recommend using this version instead of the previous one to avoid several errors.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#If-you-find-this-Mini-Tool-useful-or-encounter-some-errors,-please-leave-me-a-comment.">If you find this Mini-Tool useful or encounter some errors, please leave me a comment.</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Cheers!!!">Cheers!!!</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="RamachandranPlots.html">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RetrieveUniprot.html">Retrieve Uniprot data using python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDocking.html">Molecular docking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chem-Workflows</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Building a Multi-Molecule Mol2 reader for RDKit V2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/content/MultiMoleculeMolReader_RDKit.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Building-a-Multi-Molecule-Mol2-reader-for-RDKit-V2">
+<h1>Building a Multi-Molecule Mol2 reader for RDKit V2<a class="headerlink" href="#Building-a-Multi-Molecule-Mol2-reader-for-RDKit-V2" title="Permalink to this heading"></a></h1>
+<p>In this mini-tools entry, I want to introduce a simple but power modification to my previous version of Mol2MolSupplier for RDKIT:</p>
+<p><a class="reference external" href="https://chem-workflows.com/articles/2019/07/18/building-a-multi-molecule-mol2-reader-for-rdkit/">https://chem-workflows.com/articles/2019/07/18/building-a-multi-molecule-mol2-reader-for-rdkit/</a></p>
+<p>Perhaps some of you (as me) encountered errors when using the previous version of the Mol2MolSupplier.</p>
+<p>Well, this modification overcomes many of the previous errors which were differences in the headers and order of the Mol2 molecule blocks in different Mol2 files.</p>
+<p>This new version used the same approach as before but in a simpler and faster way.</p>
+<p>Let’s go directly to the new function:</p>
+<section id="Importing-the-libraries">
+<h2>Importing the libraries<a class="headerlink" href="#Importing-the-libraries" title="Permalink to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from rdkit import Chem
+from rdkit.Chem import Draw,AllChem
+from rdkit.Chem.Draw import IPythonConsole
+
+import pandas as pd
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def Mol2MolSupplier (file=None,sanitize=True):
+    mols=[]
+    with open(file, &#39;r&#39;) as f:
+        doc=[line for line in f.readlines()]
+
+    start=[index for (index,p) in enumerate(doc) if &#39;@&lt;TRIPOS&gt;MOLECULE&#39; in p]
+    finish=[index-1 for (index,p) in enumerate(doc) if &#39;@&lt;TRIPOS&gt;MOLECULE&#39; in p]
+    finish.append(len(doc))
+
+    interval=list(zip(start,finish[1:]))
+    for i in interval:
+        block = &quot;,&quot;.join(doc[i[0]:i[1]]).replace(&#39;,&#39;,&#39;&#39;)
+        m=Chem.MolFromMol2Block(block,sanitize=sanitize)
+        mols.append(m)
+    return(mols)
+</pre></div>
+</div>
+</div>
+<p>I will use the following multi-molecule mol2 file to show how the function works. The file contains 169 different molecules from <a class="reference external" href="https://zinc.docking.org/">ZINC</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>filePath =&#39;for-sale+in-man+fda+named+endogenous.mol2&#39;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>database=Mol2MolSupplier(filePath,sanitize=True)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+RDKit WARNING: [12:48:54] ZINC000003801919: warning - O.co2 with non C.2 or S.o2 neighbor.
+</pre></div></div>
+</div>
+<p>Because we are using RDKit to convert mol2 block texts to RDKit molecules, we can use sanitization or not. Moreover, we can see the warning for sanitization problems. If a molecule is not valid we will get a ‘None’ element.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>database[:10] #The first 10 elements in the list
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[None,
+ None,
+ None,
+ None,
+ None,
+ None,
+ None,
+ None,
+ &lt;rdkit.Chem.rdchem.Mol at 0x7f4d27fc4c10&gt;,
+ &lt;rdkit.Chem.rdchem.Mol at 0x7f4d27e57df0&gt;]
+</pre></div></div>
+</div>
+<p>Once molecules loaded. We can perform any calculation available in RDKit or converting the molecules to other formats (e.g. SDF). For instance, creating a pandas table with some useful molecular information.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table=pd.DataFrame()
+index=0
+for mol in database:
+    if mol:
+        table.loc[index,&#39;Name&#39;]=mol.GetProp(&#39;_Name&#39;)
+        table.loc[index,&#39;NumAtoms&#39;]=mol.GetNumAtoms()
+        table.loc[index,&#39;SMILES&#39;]=Chem.MolToSmiles(mol)
+        index=index+1
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>table.head(10) #The first 10 non None elements in the list
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>NumAtoms</th>
+      <th>SMILES</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ZINC000003830891</td>
+      <td>20.0</td>
+      <td>[NH3+][C@@H](CCC(=O)N[C@@H](CS)C(=O)NCC(=O)[O-...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ZINC000004474414</td>
+      <td>29.0</td>
+      <td>C=C1CC[C@H](O)C/C1=C/C=C1\CCC[C@@]2(C)[C@H]1CC...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ZINC000033943508</td>
+      <td>22.0</td>
+      <td>CC1=C(/C=C/C(C)=C\C=C\C(C)=C/C(=O)[O-])C(C)(C)...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ZINC000000001011</td>
+      <td>9.0</td>
+      <td>O=C([O-])c1ccccc1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ZINC000001530575</td>
+      <td>22.0</td>
+      <td>COc1cc(CNC(=O)CCCC/C=C/C(C)C)ccc1O</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>ZINC000003780893</td>
+      <td>30.0</td>
+      <td>CCC(C)(C)C(=O)O[C@H]1C[C@@H](C)C=C2C=C[C@H](C)...</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>ZINC000003875332</td>
+      <td>28.0</td>
+      <td>C[C@@H]1C[C@H]2[C@@H]3CCC4=CC(=O)C=C[C@]4(C)[C...</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ZINC000004095858</td>
+      <td>31.0</td>
+      <td>Cc1c(C)c2c(c(C)c1O)CC[C@@](C)(CCC[C@H](C)CCC[C...</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>ZINC000008577218</td>
+      <td>32.0</td>
+      <td>Nc1nc2ncc(CNc3ccc(C(=O)N[C@@H](CCC(=O)[O-])C(=...</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>ZINC000100015048</td>
+      <td>30.0</td>
+      <td>C=C1/C(=C\C=C2/CCC[C@@]3(C)[C@H]2CC[C@@H]3[C@H...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Drawing some non None molecules keeping the 3D coordinates from the mol2 file.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>no_none=[mol for mol in database if mol] # None element can´t be drawn, this loop keep only valid entries
+[Chem.SanitizeMol(mol) for mol in no_none]
+Draw.MolsToGridImage(no_none[:14],molsPerRow=7,subImgSize=(150,150),legends=[mol.GetProp(&#39;_Name&#39;) for mol in no_none[:14]],maxMols=100)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_MultiMoleculeMolReader_RDKit_13_0.png" src="../_images/content_MultiMoleculeMolReader_RDKit_13_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Drawing 3 random molecules of non None list
+Draw.IPythonConsole.drawMol3D(no_none[2])
+Draw.IPythonConsole.drawMol3D(no_none[6])
+Draw.IPythonConsole.drawMol3D(no_none[9])
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="3dmolviewer_15849641872723112"  style="position: relative; width: 400px; height: 400px">
+        <p id="3dmolwarning_15849641872723112" style="background-color:#ffcccc;color:black">You appear to be running in JupyterLab (or JavaScript failed to load for some other reason).  You need to install the 3dmol extension: <br>
+        <tt>jupyter labextension install jupyterlab_3dmol</tt></p>
+        </div>
+<script>
+
+var loadScriptAsync = function(uri){
+  return new Promise((resolve, reject) => {
+    var tag = document.createElement('script');
+    tag.src = uri;
+    tag.async = true;
+    tag.onload = () => {
+      resolve();
+    };
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+});
+};
+
+if(typeof $3Dmolpromise === 'undefined') {
+$3Dmolpromise = null;
+  $3Dmolpromise = loadScriptAsync('https://3dmol.csb.pitt.edu/build/3Dmol.js');
+}
+
+var viewer_15849641872723112 = null;
+var warn = document.getElementById("3dmolwarning_15849641872723112");
+if(warn) {
+    warn.parentNode.removeChild(warn);
+}
+$3Dmolpromise.then(function() {
+viewer_15849641872723112 = $3Dmol.createViewer($("#3dmolviewer_15849641872723112"),{backgroundColor:"white"});
+    viewer_15849641872723112.removeAllModels();
+    viewer_15849641872723112.addModel("ZINC000033943508\n     RDKit          3D\n\n 22 22  0  0  0  0  0  0  0  0999 V2000\n   -1.1072    0.4695   -1.1355 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4984   -0.8749   -0.8305 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2233   -1.2364    0.4999 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.5064   -0.3735    1.5109 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.3443   -0.7828    2.8584 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0098   -1.8487    3.2711 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.8898   -2.5653    2.2796 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.9375   -2.3851    4.6711 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.2885   -1.8180    5.3897 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.2984   -0.2952    5.2088 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.5774    0.0143    3.7348 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0306   -0.3366    3.4092 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3486    1.5050    3.4774 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2141   -1.7416   -1.8459 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3522   -2.9922   -1.5622 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.6389   -3.8663   -2.5864 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2047   -5.1158   -2.3029 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4014   -5.5468   -0.8723 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.5811   -5.9501   -3.3310 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.6448   -5.4600   -4.6454 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.4648   -4.1596   -4.8818 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.8853   -6.2949   -5.6575 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  1  0\n  2  3  1  0\n  2 14  2  0\n  3  4  2  0\n  4  5  1  0\n  5 11  1  0\n  5  6  2  0\n  6  7  1  0\n  6  8  1  0\n  8  9  1  0\n  9 10  1  0\n 10 11  1  0\n 11 12  1  0\n 11 13  1  0\n 14 15  1  0\n 15 16  2  0\n 16 17  1  0\n 17 18  1  0\n 17 19  2  0\n 19 20  1  0\n 20 21  1  0\n 20 22  2  0\nM  CHG  1  21  -1\nM  END\n","sdf");
+    viewer_15849641872723112.setStyle({"stick": {}});
+    viewer_15849641872723112.setBackgroundColor("0xeeeeee");
+    viewer_15849641872723112.zoomTo();
+viewer_15849641872723112.render();
+});
+</script></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="3dmolviewer_1584964187276587"  style="position: relative; width: 400px; height: 400px">
+        <p id="3dmolwarning_1584964187276587" style="background-color:#ffcccc;color:black">You appear to be running in JupyterLab (or JavaScript failed to load for some other reason).  You need to install the 3dmol extension: <br>
+        <tt>jupyter labextension install jupyterlab_3dmol</tt></p>
+        </div>
+<script>
+
+var loadScriptAsync = function(uri){
+  return new Promise((resolve, reject) => {
+    var tag = document.createElement('script');
+    tag.src = uri;
+    tag.async = true;
+    tag.onload = () => {
+      resolve();
+    };
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+});
+};
+
+if(typeof $3Dmolpromise === 'undefined') {
+$3Dmolpromise = null;
+  $3Dmolpromise = loadScriptAsync('https://3dmol.csb.pitt.edu/build/3Dmol.js');
+}
+
+var viewer_1584964187276587 = null;
+var warn = document.getElementById("3dmolwarning_1584964187276587");
+if(warn) {
+    warn.parentNode.removeChild(warn);
+}
+$3Dmolpromise.then(function() {
+viewer_1584964187276587 = $3Dmol.createViewer($("#3dmolviewer_1584964187276587"),{backgroundColor:"white"});
+    viewer_1584964187276587.removeAllModels();
+    viewer_1584964187276587.addModel("ZINC000003875332\n     RDKit          3D\n\n 28 31  0  0  0  0  0  0  0  0999 V2000\n    0.4059    1.5759    0.4731 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.3219    0.0631    0.2603 C   0  0  2  0  0  0  0  0  0  0  0  0\n   -1.1609   -0.3716    0.1037 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.5446   -0.8000    1.5244 C   0  0  1  0  0  0  0  0  0  0  0  0\n   -2.7296   -1.7422    1.6327 C   0  0  2  0  0  0  0  0  0  0  0  0\n   -3.9916   -1.0514    1.1120 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.1772   -2.0187    1.1861 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.2914   -2.5167    2.6147 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.4618   -2.4349    3.2321 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -6.6063   -2.8884    4.6241 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -7.6872   -2.8509    5.1817 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -5.4132   -3.3894    5.3272 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.2564   -3.4688    4.6888 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.0631   -3.0847    3.2620 C   0  0  1  0  0  0  0  0  0  0  0  0\n   -3.6662   -4.3433    2.4880 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.8938   -2.1074    3.1167 C   0  0  2  0  0  0  0  0  0  0  0  0\n   -3.1791   -0.9390    3.8313 F   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.6337   -2.7363    3.7035 C   0  0  1  0  0  0  0  0  0  0  0  0\n   -1.4185   -4.0086    3.0897 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.3972   -1.8536    3.4710 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.2770   -1.5763    1.9720 C   0  0  1  0  0  0  0  0  0  0  0  0\n   -0.2622   -2.8971    1.1999 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8671   -0.6800    1.5053 C   0  0  2  0  0  0  0  0  0  0  0  0\n    1.2390    0.2290    2.5434 O   0  0  0  0  0  0  0  0  0  0  0  0\n    2.0511   -1.5165    1.0934 C   0  0  0  0  0  0  0  0  0  0  0  0\n    2.1691   -1.8720   -0.0546 O   0  0  0  0  0  0  0  0  0  0  0  0\n    3.0877   -1.9093    2.1142 C   0  0  0  0  0  0  0  0  0  0  0  0\n    4.1025   -2.6943    1.4848 O   0  0  0  0  0  0  0  0  0  0  0  0\n  2  1  1  1\n  2 23  1  0\n  2  3  1  0\n  4  3  1  6\n  4 21  1  0\n  4  5  1  0\n  5 16  1  0\n  5  6  1  1\n  6  7  1  0\n  7  8  1  0\n  8 14  1  0\n  8  9  2  0\n  9 10  1  0\n 10 11  2  0\n 10 12  1  0\n 12 13  2  0\n 13 14  1  0\n 14 15  1  6\n 14 16  1  0\n 16 17  1  1\n 16 18  1  0\n 18 19  1  6\n 18 20  1  0\n 20 21  1  0\n 21 22  1  6\n 21 23  1  0\n 23 24  1  1\n 23 25  1  0\n 25 26  2  0\n 25 27  1  0\n 27 28  1  0\nM  END\n","sdf");
+    viewer_1584964187276587.setStyle({"stick": {}});
+    viewer_1584964187276587.setBackgroundColor("0xeeeeee");
+    viewer_1584964187276587.zoomTo();
+viewer_1584964187276587.render();
+});
+</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div id="3dmolviewer_15849641872791252"  style="position: relative; width: 400px; height: 400px">
+        <p id="3dmolwarning_15849641872791252" style="background-color:#ffcccc;color:black">You appear to be running in JupyterLab (or JavaScript failed to load for some other reason).  You need to install the 3dmol extension: <br>
+        <tt>jupyter labextension install jupyterlab_3dmol</tt></p>
+        </div>
+<script>
+
+var loadScriptAsync = function(uri){
+  return new Promise((resolve, reject) => {
+    var tag = document.createElement('script');
+    tag.src = uri;
+    tag.async = true;
+    tag.onload = () => {
+      resolve();
+    };
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+});
+};
+
+if(typeof $3Dmolpromise === 'undefined') {
+$3Dmolpromise = null;
+  $3Dmolpromise = loadScriptAsync('https://3dmol.csb.pitt.edu/build/3Dmol.js');
+}
+
+var viewer_15849641872791252 = null;
+var warn = document.getElementById("3dmolwarning_15849641872791252");
+if(warn) {
+    warn.parentNode.removeChild(warn);
+}
+$3Dmolpromise.then(function() {
+viewer_15849641872791252 = $3Dmol.createViewer($("#3dmolviewer_15849641872791252"),{backgroundColor:"white"});
+    viewer_15849641872791252.removeAllModels();
+    viewer_15849641872791252.addModel("ZINC000100015048\n     RDKit          3D\n\n 30 32  0  0  0  0  0  0  0  0999 V2000\n   -0.0160    1.3287    0.0093 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0021   -0.0041    0.0020 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2458   -0.7957    0.0034 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.2888   -0.4702    0.7946 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.2010    0.6928    1.6807 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.2315    1.0144    2.4625 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.5223    0.2081    2.4828 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.9173   -0.1433    3.9158 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -4.8665    1.0854    4.8394 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.4543    1.6214    4.8074 C   0  0  1  0  0  0  0  0  0  0  0  0\n   -2.4723    0.4739    5.0518 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1997    2.1930    3.3895 C   0  0  1  0  0  0  0  0  0  0  0  0\n   -1.8466    2.8812    3.5834 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.0103    3.5773    4.9641 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -3.1032    2.7859    5.7205 C   0  0  2  0  0  0  0  0  0  0  0  0\n   -2.5598    2.2722    7.0553 C   0  0  2  0  0  0  0  0  0  0  0  0\n   -3.6439    1.4628    7.7697 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -2.1500    3.4590    7.9297 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.4923    2.9447    9.2118 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.0825    4.1315   10.0862 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.4248    3.6172   11.3683 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.8149    2.7948   11.0111 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -0.0150    4.8040   12.2427 C   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.3512    2.7966   12.0828 O   0  0  0  0  0  0  0  0  0  0  0  0\n   -1.2973   -1.9907   -0.9275 C   0  0  0  0  0  0  0  0  0  0  0  0\n    0.0043   -2.7830   -0.7683 C   0  0  1  0  0  0  0  0  0  0  0  0\n    0.0024   -3.8870   -1.6757 O   0  0  0  0  0  0  0  0  0  0  0  0\n    1.2007   -1.8801   -1.0710 C   0  0  0  0  0  0  0  0  0  0  0  0\n    1.3034   -0.7809   -0.0146 C   0  0  2  0  0  0  0  0  0  0  0  0\n    1.5228   -1.3669    1.2701 O   0  0  0  0  0  0  0  0  0  0  0  0\n  1  2  2  0\n  2 29  1  0\n  2  3  1  0\n  3  4  2  0\n  3 25  1  0\n  4  5  1  0\n  5  6  2  0\n  6 12  1  0\n  6  7  1  0\n  7  8  1  0\n  8  9  1  0\n  9 10  1  0\n 10 15  1  0\n 10 11  1  1\n 10 12  1  0\n 12 13  1  1\n 13 14  1  0\n 15 14  1  6\n 15 16  1  0\n 16 17  1  1\n 16 18  1  0\n 18 19  1  0\n 19 20  1  0\n 20 21  1  0\n 21 22  1  0\n 21 23  1  0\n 21 24  1  0\n 25 26  1  0\n 26 27  1  6\n 26 28  1  0\n 28 29  1  0\n 29 30  1  1\nM  END\n","sdf");
+    viewer_15849641872791252.setStyle({"stick": {}});
+    viewer_15849641872791252.setBackgroundColor("0xeeeeee");
+    viewer_15849641872791252.zoomTo();
+viewer_15849641872791252.render();
+});
+</script></div>
+</div>
+<section id="As-you-can-see,-the-functionality-of-this-library-is-similar-to-the-previous-one.-I-would-strongly-recommend-using-this-version-instead-of-the-previous-one-to-avoid-several-errors.">
+<h3>As you can see, the functionality of this library is similar to the previous one. I would strongly recommend using this version instead of the previous one to avoid several errors.<a class="headerlink" href="#As-you-can-see,-the-functionality-of-this-library-is-similar-to-the-previous-one.-I-would-strongly-recommend-using-this-version-instead-of-the-previous-one-to-avoid-several-errors." title="Permalink to this heading"></a></h3>
+</section>
+<section id="If-you-find-this-Mini-Tool-useful-or-encounter-some-errors,-please-leave-me-a-comment.">
+<h3>If you find this Mini-Tool useful or encounter some errors, please leave me a comment.<a class="headerlink" href="#If-you-find-this-Mini-Tool-useful-or-encounter-some-errors,-please-leave-me-a-comment." title="Permalink to this heading"></a></h3>
+<section id="Cheers!!!">
+<h4>Cheers!!!<a class="headerlink" href="#Cheers!!!" title="Permalink to this heading"></a></h4>
+<div data-disqus-identifier="Building a Multi-Molecule Mol2 reader for RDKit V2" data-disqus-shortname="chem-workflows" id="disqus_thread"></div></section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PoseClustering.html" class="btn btn-neutral float-left" title="Pose clustering of docking results" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="RamachandranPlots.html" class="btn btn-neutral float-right" title="Ramachandran plot (gerdos/PyRAMA engine)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B3SRZ82WR5', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>

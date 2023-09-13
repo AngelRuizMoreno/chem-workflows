@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-B3SRZ82WR5');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramachandran plot (gerdos/PyRAMA engine) &mdash; Chem-Workflows 0.0.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../_static/disqus.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Retrieve Uniprot data using python" href="RetrieveUniprot.html" />
+    <link rel="prev" title="Building a Multi-Molecule Mol2 reader for RDKit V2" href="MultiMoleculeMolReader_RDKit.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+            <a href="../index.html" class="icon icon-home"> Chem-Workflows
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SimilarityAnalysis.html">Similarity analysis of compound databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PCA_compounds.html">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PoseClustering.html">Pose clustering of docking results</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="MultiMoleculeMolReader_RDKit.html">Building a Multi-Molecule Mol2 reader for RDKit V2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RetrieveUniprot.html">Retrieve Uniprot data using python</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="MolecularDocking.html">Molecular docking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Chem-Workflows</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Ramachandran plot (gerdos/PyRAMA engine)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/content/RamachandranPlots.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Ramachandran-plot-(gerdos/PyRAMA-engine)">
+<h1>Ramachandran plot (gerdos/PyRAMA engine)<a class="headerlink" href="#Ramachandran-plot-(gerdos/PyRAMA-engine)" title="Permalink to this heading"></a></h1>
+<p>In this minitool I want to share with you the implemetation of Gerdos pyRAMA tool for ploting Ramachandran plots of proteins inside of jupyter notebook. The full code of pyRAMA can be found on gerdos Github page (<a class="reference external" href="https://github.com/gerdos/PyRAMA">https://github.com/gerdos/PyRAMA</a>).</p>
+<p>The aim of this minitool is not just to visualize the Ramachandran plots but also perform some structural visualization using nglview. Let’s put the hands on it.</p>
+<p>For Ramachandran plots we need the pyRAMA code. Next cell contains such code ready to work directly on jupyter as funtion, but before to run the funtion we need 2 things and they are mandatory.</p>
+<p>1- The pdb file we want to analyze (from the PDB database or a model that we made). 2- The rama500- .data files which store the density profiles or occupancies as a grid (download from my github at: <a class="reference external" href="https://github.com/AngelRuizMoreno/Cheminformatics_workflows_source/blob/master/Others/rama-500.zip">https://github.com/AngelRuizMoreno/Cheminformatics_workflows_source/blob/master/Others/rama-500.zip</a> )</p>
+<p>Now let’s run the script</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pdb_file=&#39;1eve.pdb&#39; #This is the pdb we will analize
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import math
+import sys
+import os
+
+import matplotlib.pyplot as plt
+import numpy as np
+from Bio import PDB
+from matplotlib import colors
+
+def plot_ramachandran(file):
+    __file__=file
+
+    &quot;&quot;&quot;
+    The preferences were calculated from the following artice:
+    Lovell et al. Structure validation by Calpha geometry: phi,psi and Cbeta deviation. 2003
+    DOI: 10.1002/prot.10286
+    &quot;&quot;&quot;
+
+    # General variable for the background preferences
+    rama_preferences = {
+        &quot;General&quot;: {
+            &quot;file&quot;: &quot;rama500-general.data&quot;,
+            &quot;cmap&quot;: colors.ListedColormap([&#39;#FFFFFF&#39;, &#39;#B3E8FF&#39;, &#39;#7FD9FF&#39;]),
+            &quot;bounds&quot;: [0, 0.0005, 0.02, 1],
+        },
+        &quot;GLY&quot;: {
+            &quot;file&quot;: &quot;rama500-gly-sym.data&quot;,
+            &quot;cmap&quot;: colors.ListedColormap([&#39;#FFFFFF&#39;, &#39;#FFE8C5&#39;, &#39;#FFCC7F&#39;]),
+            &quot;bounds&quot;: [0, 0.002, 0.02, 1],
+        },
+        &quot;PRO&quot;: {
+            &quot;file&quot;: &quot;rama500-pro.data&quot;,
+            &quot;cmap&quot;: colors.ListedColormap([&#39;#FFFFFF&#39;, &#39;#D0FFC5&#39;, &#39;#7FFF8C&#39;]),
+            &quot;bounds&quot;: [0, 0.002, 0.02, 1],
+        },
+        &quot;PRE-PRO&quot;: {
+            &quot;file&quot;: &quot;rama500-prepro.data&quot;,
+            &quot;cmap&quot;: colors.ListedColormap([&#39;#FFFFFF&#39;, &#39;#B3E8FF&#39;, &#39;#7FD9FF&#39;]),
+            &quot;bounds&quot;: [0, 0.002, 0.02, 1],
+        }
+    }
+
+    # Read in the expected torsion angles
+    __location__ = &#39;./&#39; #You must set the ptah of the .data files here
+    rama_pref_values = {}
+    for key, val in rama_preferences.items():
+        rama_pref_values[key] = np.full((360, 360), 0, dtype=np.float64)
+        with open(os.path.join(__location__, val[&quot;file&quot;])) as fn:
+            for line in fn:
+                if not line.startswith(&quot;#&quot;):
+                    # Preference file has values for every second position only
+                    rama_pref_values[key][int(float(line.split()[1])) + 180][int(float(line.split()[0])) + 180] = float(
+                        line.split()[2])
+                    rama_pref_values[key][int(float(line.split()[1])) + 179][int(float(line.split()[0])) + 179] = float(
+                        line.split()[2])
+                    rama_pref_values[key][int(float(line.split()[1])) + 179][int(float(line.split()[0])) + 180] = float(
+                        line.split()[2])
+                    rama_pref_values[key][int(float(line.split()[1])) + 180][int(float(line.split()[0])) + 179] = float(
+                        line.split()[2])
+
+    normals = {}
+    outliers = {}
+    for key, val in rama_preferences.items():
+        normals[key] = {&quot;x&quot;: [], &quot;y&quot;: [],&#39;Res&#39;:[]}
+        outliers[key] = {&quot;x&quot;: [], &quot;y&quot;: []}
+
+    # Calculate the torsion angle of the inputs
+    #for inp in sys.argv[1:]:
+        #if not os.path.isfile(inp):
+            #print(&quot;{} not found!&quot;.format(inp))
+            #continue
+    structure = PDB.PDBParser().get_structure(&#39;input_structure&#39;, __file__)
+    for model in structure:
+        for chain in model:
+            polypeptides = PDB.PPBuilder().build_peptides(chain)
+            for poly_index, poly in enumerate(polypeptides):
+                phi_psi = poly.get_phi_psi_list()
+                for res_index, residue in enumerate(poly):
+                    res_name = &quot;{}&quot;.format(residue.resname)
+                    res_num = residue.id[1]
+                    phi, psi = phi_psi[res_index]
+                    if phi and psi:
+                        aa_type = &quot;&quot;
+                        if str(poly[res_index + 1].resname) == &quot;PRO&quot;:
+                            aa_type = &quot;PRE-PRO&quot;
+                        elif res_name == &quot;PRO&quot;:
+                            aa_type = &quot;PRO&quot;
+                        elif res_name == &quot;GLY&quot;:
+                            aa_type = &quot;GLY&quot;
+                        else:
+                            aa_type = &quot;General&quot;
+                        if rama_pref_values[aa_type][int(math.degrees(psi)) + 180][int(math.degrees(phi)) + 180] &lt; \
+                                rama_preferences[aa_type][&quot;bounds&quot;][1]:
+                            print(&quot;{} {} {} {}{} is an outlier&quot;.format(inp, model, chain, res_name, res_num))
+                            outliers[aa_type][&quot;x&quot;].append(math.degrees(phi))
+                            outliers[aa_type][&quot;y&quot;].append(math.degrees(psi))
+                        else:
+                            normals[aa_type][&quot;x&quot;].append(math.degrees(phi))
+                            normals[aa_type][&quot;y&quot;].append(math.degrees(psi))
+                            normals[aa_type][&#39;Res&#39;].append(res_name+&#39;_&#39;+str(res_num))
+
+    # Generate the plots
+    plt.figure(figsize=(10,10))
+    for idx, (key, val) in enumerate(sorted(rama_preferences.items(), key=lambda x: x[0].lower())):
+        plt.subplot(2, 2, idx + 1)
+        plt.title(key,fontsize=20)
+        plt.imshow(rama_pref_values[key], cmap=rama_preferences[key][&quot;cmap&quot;],
+                   norm=colors.BoundaryNorm(rama_preferences[key][&quot;bounds&quot;], rama_preferences[key][&quot;cmap&quot;].N),
+                   extent=(-180, 180, 180, -180),alpha=0.7)
+
+        plt.scatter(normals[key][&quot;x&quot;], normals[key][&quot;y&quot;],s=[15],marker=&#39;.&#39;)
+
+        #for key in normals:
+            #for i, name in enumerate (normals[key][&#39;Res&#39;]):
+                #plt.annotate(name, (normals[key][&quot;x&quot;][i], normals[key][&quot;y&quot;][i]))
+
+        plt.scatter(outliers[key][&quot;x&quot;], outliers[key][&quot;y&quot;],color=&quot;red&quot;,s=[15],marker=&#39;.&#39;)
+        plt.xlim([-180, 180])
+        plt.ylim([-180, 180])
+        plt.plot([-180, 180], [0, 0],color=&quot;k&quot;,alpha=0.7)
+        plt.plot([0, 0], [-180, 180],color=&quot;k&quot;,alpha=0.7)
+        plt.xlabel(r&#39;$\phi$&#39;,fontsize=12)
+        plt.ylabel(r&#39;$\psi$&#39;,fontsize=12)
+        plt.grid(linestyle=&#39;dotted&#39;)
+
+    plt.tight_layout()
+    # plt.savefig(&quot;asd.png&quot;, dpi=300) #Uncommet this line of you want so save the plot in a specific location
+    plt.show()
+</pre></div>
+</div>
+</div>
+<p>Time to visualize the Ramachandran plot of the 1eve.pdb file</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plot_ramachandran(pdb_file)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/content_RamachandranPlots_4_0.png" src="../_images/content_RamachandranPlots_4_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import nglview as nv #Let&#39;s see the 3D structure of the protein
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d8b98eabab624076bdfa0261cd951728", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>nv.show_structure_file(pdb_file)
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "67c99d23abaf4aa286eac99c1bd69aee", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<p>I know that this is something simple and not very useful. But it could be the first idea to perform more deep analysis and figures. The pyRAMA code can be easily modified to convert the simple plot into an interactive one. Such modification can be useful to identify outlayer residues and then visualize them using nglview.</p>
+<p>Independently what you whant to do, I hope you find useful this minitool. At least to make cool Ramachandran plots of your protein structures.</p>
+<div data-disqus-identifier="Ramachandran plot (gerdos/PyRAMA engine)" data-disqus-shortname="chem-workflows" id="disqus_thread"></div></section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MultiMoleculeMolReader_RDKit.html" class="btn btn-neutral float-left" title="Building a Multi-Molecule Mol2 reader for RDKit V2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="RetrieveUniprot.html" class="btn btn-neutral float-right" title="Retrieve Uniprot data using python" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script>
+    <!-- Theme Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-B3SRZ82WR5', {
+          'anonymize_ip': false,
+      });
+    </script> 
+
+</body>
+</html>
