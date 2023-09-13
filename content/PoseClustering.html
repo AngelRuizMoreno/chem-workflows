@@ -1,7 +1,10 @@
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
@@ -12,104 +15,54 @@
         gtag('config', 'G-B3SRZ82WR5');
     </script>
     
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pose clustering of docking results &mdash; Chem-Workflows 0.0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script src="../_static/disqus.js"></script>
-    <script src="../_static/js/theme.js"></script>
+    <title>Pose clustering of docking results &#8212; Chem-Workflows  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/disqus.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Building a Multi-Molecule Mol2 reader for RDKit V2" href="MultiMoleculeMolReader_RDKit.html" />
     <link rel="prev" title="Exploring the chemical space by Principal Component Analysis (PCA) and clustering" href="PCA_compounds.html" /> 
-</head>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="MultiMoleculeMolReader_RDKit.html" title="Building a Multi-Molecule Mol2 reader for RDKit V2"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="PCA_compounds.html" title="Exploring the chemical space by Principal Component Analysis (PCA) and clustering"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Chem-Workflows  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pose clustering of docking results</a></li> 
+      </ul>
+    </div>  
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #2980B9" >
-            <a href="../index.html" class="icon icon-home"> Chem-Workflows
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SimilarityAnalysis.html">Similarity analysis of compound databases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PCA_compounds.html">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Pose clustering of docking results</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Importing-the-libraries">Importing the libraries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#In-place-RMS-calculation-using-RDKIT-Maximum-Common-Substructure">In place RMS calculation using RDKIT Maximum Common Substructure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#Loading-the-poses">Loading the poses</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#RMS-in-place-calculation">RMS in place calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Pose-clustering">Pose clustering</a></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="MultiMoleculeMolReader_RDKit.html">Building a Multi-Molecule Mol2 reader for RDKit V2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RamachandranPlots.html">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RetrieveUniprot.html">Retrieve Uniprot data using python</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="MolecularDocking.html">Molecular docking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Chem-Workflows</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">Pose clustering of docking results</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/content/PoseClustering.ipynb.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
   <section id="Pose-clustering-of-docking-results">
-<h1>Pose clustering of docking results<a class="headerlink" href="#Pose-clustering-of-docking-results" title="Permalink to this heading"></a></h1>
+<h1>Pose clustering of docking results<a class="headerlink" href="#Pose-clustering-of-docking-results" title="Permalink to this heading">¶</a></h1>
 <p>In this Cheminformatics workflow I will show you how to perform a pose clustering from docking experiments (no matter what software they come from). For this workflow I will use RDKIT and the clustering will be based on The Cambridge Crystallographic Data Centre (CCDC) pose clustering analysis described in: (<a class="reference external" href="https://www.ccdc.cam.ac.uk/support-and-resources/ccdcresources/GOLD_User_Guide.pdf">GOLD_user_guide</a>)</p>
 <p>#### Remarks:</p>
 <p>Pose clustering is based on in place RMS calculation of the molecule poses. However, RDKIT cannot perform in place RMS calculations (yet). Because of that I will need to use another library (for instance Pymol) or calculate the RMS by applying the RMS formula (<a class="reference external" href="https://en.wikipedia.org/wiki/Root-mean-square_deviation_of_atomic_positions">wikipedia_RMSD</a>).</p>
 <p>For this workflow, I will use both and then I will discuss which is better for this approach (in my opinion).</p>
 <section id="Importing-the-libraries">
-<h2>Importing the libraries<a class="headerlink" href="#Importing-the-libraries" title="Permalink to this heading"></a></h2>
+<h2>Importing the libraries<a class="headerlink" href="#Importing-the-libraries" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -138,10 +91,10 @@ from scipy.cluster.hierarchy import dendrogram, linkage
 </div>
 </section>
 <section id="In-place-RMS-calculation-using-RDKIT-Maximum-Common-Substructure">
-<h2>In place RMS calculation using RDKIT Maximum Common Substructure<a class="headerlink" href="#In-place-RMS-calculation-using-RDKIT-Maximum-Common-Substructure" title="Permalink to this heading"></a></h2>
+<h2>In place RMS calculation using RDKIT Maximum Common Substructure<a class="headerlink" href="#In-place-RMS-calculation-using-RDKIT-Maximum-Common-Substructure" title="Permalink to this heading">¶</a></h2>
 <p>To get the atom mapping of our docking poses we will use the Maximum Common Substructure (<a class="reference external" href="http://rdkit.org/docs/source/rdkit.Chem.MCS.html">MCS</a>) search module from RDKIT. For comparison with other RMS in place method, I will use pymol Rms_cur method (<a class="reference external" href="https://pymolwiki.org/index.php/Rms_cur">Rms_cur</a>).</p>
 <section id="Loading-the-poses">
-<h3>Loading the poses<a class="headerlink" href="#Loading-the-poses" title="Permalink to this heading"></a></h3>
+<h3>Loading the poses<a class="headerlink" href="#Loading-the-poses" title="Permalink to this heading">¶</a></h3>
 <p>After docking I have a .sdf file for each molecule with 10 poses. I want to compare all my poses</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -177,7 +130,7 @@ img
 </section>
 </section>
 <section id="RMS-in-place-calculation">
-<h2>RMS in place calculation<a class="headerlink" href="#RMS-in-place-calculation" title="Permalink to this heading"></a></h2>
+<h2>RMS in place calculation<a class="headerlink" href="#RMS-in-place-calculation" title="Permalink to this heading">¶</a></h2>
 <p>For an accurate RMS calculation we need to establish the atom pairs that will be used for RMS calculation. For such purpose I will use the MCS.</p>
 <p>The idea of using the MCS is to generate the atom pairs for comparison. This is important, because atom mapping for poses of same molecule can be different in some cases. For instance, if they come from different docking softwares or due to format conversion (e.g. converting output mols from docking using openbabel).</p>
 <p>Because of above, performing MCS will find the atom map matching pairs for the poses before of doing the RMS calculation.</p>
@@ -652,7 +605,7 @@ for i,mol in enumerate(renamed_poses):
 <p>As you can see, values from RMS formula and Pymol Rms_cur are the same. However, for this calculation Pymol generates the atom selection by turning on the option <strong>matchmaker=1</strong>. In my experience, when working with poses from different softwares. Pymol Rms_cur can fail even with matchmaker=1. So I would advice to use it carefully and corroborate the RMS values by using the MCS from RDKIT.</p>
 </section>
 <section id="Pose-clustering">
-<h2>Pose clustering<a class="headerlink" href="#Pose-clustering" title="Permalink to this heading"></a></h2>
+<h2>Pose clustering<a class="headerlink" href="#Pose-clustering" title="Permalink to this heading">¶</a></h2>
 <p>As I refer before, this analysis will be based on the GOLD clustering of poses from the CCDC. Therefore, we need to use a complete linkage hierarchical clustering algorithm (HCL). This can be easy doing by typing:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -774,45 +727,78 @@ plt.plot()
 </section>
 
 
-           </div>
+            <div class="clearer"></div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="PCA_compounds.html" class="btn btn-neutral float-left" title="Exploring the chemical space by Principal Component Analysis (PCA) and clustering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="MultiMoleculeMolReader_RDKit.html" class="btn btn-neutral float-right" title="Building a Multi-Molecule Mol2 reader for RDKit V2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
         </div>
       </div>
-    </section>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Pose clustering of docking results</a><ul>
+<li><a class="reference internal" href="#Importing-the-libraries">Importing the libraries</a></li>
+<li><a class="reference internal" href="#In-place-RMS-calculation-using-RDKIT-Maximum-Common-Substructure">In place RMS calculation using RDKIT Maximum Common Substructure</a><ul>
+<li><a class="reference internal" href="#Loading-the-poses">Loading the poses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#RMS-in-place-calculation">RMS in place calculation</a></li>
+<li><a class="reference internal" href="#Pose-clustering">Pose clustering</a></li>
+</ul>
+</li>
+</ul>
+
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(false);
-      });
-  </script>
-    <!-- Theme Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-B3SRZ82WR5', {
-          'anonymize_ip': false,
-      });
-    </script> 
-
-</body>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="PCA_compounds.html"
+                          title="previous chapter">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="MultiMoleculeMolReader_RDKit.html"
+                          title="next chapter">Building a Multi-Molecule Mol2 reader for RDKit V2</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/content/PoseClustering.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="MultiMoleculeMolReader_RDKit.html" title="Building a Multi-Molecule Mol2 reader for RDKit V2"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="PCA_compounds.html" title="Exploring the chemical space by Principal Component Analysis (PCA) and clustering"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Chem-Workflows  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Pose clustering of docking results</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Angel J. Ruiz-Moreno.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
 </html>

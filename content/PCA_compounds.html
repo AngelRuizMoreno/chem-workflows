@@ -1,7 +1,10 @@
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
@@ -12,107 +15,53 @@
         gtag('config', 'G-B3SRZ82WR5');
     </script>
     
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Exploring the chemical space by Principal Component Analysis (PCA) and clustering &mdash; Chem-Workflows 0.0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script src="../_static/disqus.js"></script>
-    <script src="../_static/js/theme.js"></script>
+    <title>Exploring the chemical space by Principal Component Analysis (PCA) and clustering &#8212; Chem-Workflows  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/disqus.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Pose clustering of docking results" href="PoseClustering.html" />
     <link rel="prev" title="Similarity analysis of compound databases" href="SimilarityAnalysis.html" /> 
-</head>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="PoseClustering.html" title="Pose clustering of docking results"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="SimilarityAnalysis.html" title="Similarity analysis of compound databases"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Chem-Workflows  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li> 
+      </ul>
+    </div>  
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #2980B9" >
-            <a href="../index.html" class="icon icon-home"> Chem-Workflows
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SimilarityAnalysis.html">Similarity analysis of compound databases</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Importing-the-libraries-we-will-use">Importing the libraries we will use</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Loading-the-molecules">Loading the molecules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Molecular-descriptors-calculation">Molecular descriptors calculation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)">Principal Component Analysis of calculated molecular descriptors (PCA)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#K-means-clustering-and-main-features-identification">K-means clustering and main features identification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#k-means-clustering">k-means clustering</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Now-everything-together">Now everything together</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="PoseClustering.html">Pose clustering of docking results</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="MultiMoleculeMolReader_RDKit.html">Building a Multi-Molecule Mol2 reader for RDKit V2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RamachandranPlots.html">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RetrieveUniprot.html">Retrieve Uniprot data using python</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="MolecularDocking.html">Molecular docking</a></li>
-<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Chem-Workflows</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/content/PCA_compounds.ipynb.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
   <section id="Exploring-the-chemical-space-by-Principal-Component-Analysis-(PCA)-and-clustering">
-<h1>Exploring the chemical space by Principal Component Analysis (PCA) and clustering<a class="headerlink" href="#Exploring-the-chemical-space-by-Principal-Component-Analysis-(PCA)-and-clustering" title="Permalink to this heading"></a></h1>
+<h1>Exploring the chemical space by Principal Component Analysis (PCA) and clustering<a class="headerlink" href="#Exploring-the-chemical-space-by-Principal-Component-Analysis-(PCA)-and-clustering" title="Permalink to this heading">¶</a></h1>
 <p>In this chem-workflow, I will show you how to analyze compound databases in order to identify shared descriptors (physicochemical properties) among them.</p>
 <p>A server to perform this analysis (or a similar one) is Platform for Unified Molecular Analysis (PUMA).</p>
 <p>For this purpose, I will use a fraction of the REAL Compound Library of Enamine. You can find another example using the same database <a class="reference external" href="https://chem-workflows.com/articles/2019/06/28/similarity-analysis-of-compound-databases/">here</a>.</p>
 <section id="Importing-the-libraries-we-will-use">
-<h2>Importing the libraries we will use<a class="headerlink" href="#Importing-the-libraries-we-will-use" title="Permalink to this heading"></a></h2>
+<h2>Importing the libraries we will use<a class="headerlink" href="#Importing-the-libraries-we-will-use" title="Permalink to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -137,7 +86,7 @@ from sklearn.cluster import KMeans
 </div>
 </section>
 <section id="Loading-the-molecules">
-<h2>Loading the molecules<a class="headerlink" href="#Loading-the-molecules" title="Permalink to this heading"></a></h2>
+<h2>Loading the molecules<a class="headerlink" href="#Loading-the-molecules" title="Permalink to this heading">¶</a></h2>
 <p>The library contains more than 8 000 000 SMILES codes (size 542.8 M). But we can read the .smiles file as a text file to keep the fist 100 molecules in a pandas table.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -246,7 +195,7 @@ with open(&#39;Enamine_REAL_diversity.smiles&#39;,&#39;r&#39;) as file:
 </div>
 </section>
 <section id="Molecular-descriptors-calculation">
-<h2>Molecular descriptors calculation<a class="headerlink" href="#Molecular-descriptors-calculation" title="Permalink to this heading"></a></h2>
+<h2>Molecular descriptors calculation<a class="headerlink" href="#Molecular-descriptors-calculation" title="Permalink to this heading">¶</a></h2>
 <p>We can use RDKIT to calculate several molecular descriptors (2D and 3D). However, for this example, we will focus on the descriptors measured in the publication: Platform for Unified Molecular Analysis PUMA <a class="reference external" href="https://pubs.acs.org/doi/10.1021/acs.jcim.7b00253">10.1021/acs.jcim.7b00253</a>.</p>
 <p>Moreover, a list of all descriptor that can be calculated using RDKIT can be found <a class="reference external" href="https://www.rdkit.org/docs/GettingStartedInPython.html">here</a>.</p>
 <div class="nbinput nblast docutils container">
@@ -424,7 +373,7 @@ for i in table.index:
 </div>
 </section>
 <section id="Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)">
-<h2>Principal Component Analysis of calculated molecular descriptors (PCA)<a class="headerlink" href="#Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)" title="Permalink to this heading"></a></h2>
+<h2>Principal Component Analysis of calculated molecular descriptors (PCA)<a class="headerlink" href="#Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)" title="Permalink to this heading">¶</a></h2>
 <p>I won´t discuss the basis of PCA due to this site is focused on workflows. However, PCA analysis for different application has been discussed plenty. As a quick reference, you can visit the PCA explanation at <a class="reference external" href="https://en.wikipedia.org/wiki/Principal_component_analysis">Wikipedia</a>.</p>
 <p>For our analysis, we need to select the values of the table that we will use for PCA. Meaning, the descriptors we calculated.</p>
 <div class="nbinput nblast docutils container">
@@ -678,7 +627,7 @@ plt.show()
 <p>For this example, we will identify the most important feature (descriptor), and we identify compound clusters by the k-means clustering algorithm. For more info about k-means, you can look at <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html">skit-learn</a>.</p>
 </section>
 <section id="K-means-clustering-and-main-features-identification">
-<h2>K-means clustering and main features identification<a class="headerlink" href="#K-means-clustering-and-main-features-identification" title="Permalink to this heading"></a></h2>
+<h2>K-means clustering and main features identification<a class="headerlink" href="#K-means-clustering-and-main-features-identification" title="Permalink to this heading">¶</a></h2>
 <p>The first step for this analysis is to re-scale our PCA values from -1 to 1. This because we want to analyze our data inside of the covariance cycle of the features (descriptors). Fur such purpose we type:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -878,7 +827,7 @@ plt.show()
 </div>
 <p>As you can see, the distribution of the points is the same as before, however, the scale now is from -1 to 1.</p>
 <section id="k-means-clustering">
-<h3>k-means clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading"></a></h3>
+<h3>k-means clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this heading">¶</a></h3>
 <p>K-means clustering is an algorithm in which the user must define the number of clusters. However, in order to mathematically select a number of clusters for a group of points based on distribution, different algorithms can be applied. For instance, we will use the silhouette-based algorithm to identify the best number of clusters for our distribution. More info about silhouette algorithm can be found
 <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html">here</a> and <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html">here</a>.</p>
 <div class="nbinput docutils container">
@@ -1227,7 +1176,7 @@ clusters = kmeans.fit(descriptors_pca[[&#39;PC1_normalized&#39;,&#39;PC2_normali
 </div></div>
 </div>
 <section id="Now-everything-together">
-<h4>Now everything together<a class="headerlink" href="#Now-everything-together" title="Permalink to this heading"></a></h4>
+<h4>Now everything together<a class="headerlink" href="#Now-everything-together" title="Permalink to this heading">¶</a></h4>
 <p>We will plot PC1 vs PC2 data. Each cluster will have a different color, and we will find the main feature for each principal component.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -1572,45 +1521,82 @@ plt.show()
 </section>
 
 
-           </div>
+            <div class="clearer"></div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="SimilarityAnalysis.html" class="btn btn-neutral float-left" title="Similarity analysis of compound databases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="PoseClustering.html" class="btn btn-neutral float-right" title="Pose clustering of docking results" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
         </div>
       </div>
-    </section>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a><ul>
+<li><a class="reference internal" href="#Importing-the-libraries-we-will-use">Importing the libraries we will use</a></li>
+<li><a class="reference internal" href="#Loading-the-molecules">Loading the molecules</a></li>
+<li><a class="reference internal" href="#Molecular-descriptors-calculation">Molecular descriptors calculation</a></li>
+<li><a class="reference internal" href="#Principal-Component-Analysis-of-calculated-molecular-descriptors-(PCA)">Principal Component Analysis of calculated molecular descriptors (PCA)</a></li>
+<li><a class="reference internal" href="#K-means-clustering-and-main-features-identification">K-means clustering and main features identification</a><ul>
+<li><a class="reference internal" href="#k-means-clustering">k-means clustering</a><ul>
+<li><a class="reference internal" href="#Now-everything-together">Now everything together</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(false);
-      });
-  </script>
-    <!-- Theme Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-B3SRZ82WR5', {
-          'anonymize_ip': false,
-      });
-    </script> 
-
-</body>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="SimilarityAnalysis.html"
+                          title="previous chapter">Similarity analysis of compound databases</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="PoseClustering.html"
+                          title="next chapter">Pose clustering of docking results</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/content/PCA_compounds.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="PoseClustering.html" title="Pose clustering of docking results"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="SimilarityAnalysis.html" title="Similarity analysis of compound databases"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Chem-Workflows  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Angel J. Ruiz-Moreno.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
 </html>

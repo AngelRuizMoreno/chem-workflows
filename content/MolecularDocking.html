@@ -1,7 +1,10 @@
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
-<head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
@@ -12,143 +15,51 @@
         gtag('config', 'G-B3SRZ82WR5');
     </script>
     
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Molecular docking &mdash; Chem-Workflows 0.0.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script src="../_static/disqus.js"></script>
-    <script src="../_static/js/theme.js"></script>
+    <title>Molecular docking &#8212; Chem-Workflows  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/disqus.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Virtual Screening" href="VirtualScreening.html" />
     <link rel="prev" title="Retrieve Uniprot data using python" href="RetrieveUniprot.html" /> 
-</head>
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="VirtualScreening.html" title="Virtual Screening"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="RetrieveUniprot.html" title="Retrieve Uniprot data using python"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Chem-Workflows  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Molecular docking</a></li> 
+      </ul>
+    </div>  
 
-<body class="wy-body-for-nav"> 
-  <div class="wy-grid-for-nav">
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-scroll">
-        <div class="wy-side-nav-search"  style="background: #2980B9" >
-            <a href="../index.html" class="icon icon-home"> Chem-Workflows
-          </a>
-<div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
-  </form>
-</div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="ChemicalSpace.html">Exploration of the chemical space using RDKIT and cheminformatics</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MolecularDynamics.html">Brief introduction to Molecular Dynamics analysis with MDanalysis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="SimilarityAnalysis.html">Similarity analysis of compound databases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PCA_compounds.html">Exploring the chemical space by Principal Component Analysis (PCA) and clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PoseClustering.html">Pose clustering of docking results</a></li>
-</ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="MultiMoleculeMolReader_RDKit.html">Building a Multi-Molecule Mol2 reader for RDKit V2</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RamachandranPlots.html">Ramachandran plot (gerdos/PyRAMA engine)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RetrieveUniprot.html">Retrieve Uniprot data using python</a></li>
-</ul>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Molecular docking</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#Content-of-this-notebook">Content of this notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#1.-Feching-system-and-cleanup">1. Feching system and cleanup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#2.-Protein-and-ligand-sanitization">2. Protein and ligand sanitization</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#2.1.-Protein-Sanitization">2.1. Protein Sanitization</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Method-1:-LePro">Method 1: LePro</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Method-2:-fix_protein-(PDBFixer)">Method 2: fix_protein (PDBFixer)</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#2.2.-Ligand-sanitization">2.2. Ligand sanitization</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#3.-System-Visualization">3. System Visualization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#4.-Docking-with-AutoDock-Vina">4. Docking with AutoDock Vina</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#4.1.-Protein-preparation">4.1. Protein preparation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Method-1:-AutoDock-Tools-prepare_receptor">Method 1: AutoDock Tools prepare_receptor</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#4.2.-Ligand-preparation">4.2. Ligand preparation</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#Method-1:-AutoDock-Tools-prepare_ligand">Method 1: AutoDock Tools prepare_ligand</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Method-2:-Meeko">Method 2: Meeko</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#Method-3:-Pybel">Method 3: Pybel</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#4.3.-Box-definition">4.3. Box definition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.4.-Docking">4.4. Docking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.5.-PDBQT-results-file-conversion-to-SDF">4.5. PDBQT results file conversion to SDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.6.-3D-visualization-of-docking-results-(AutoDock-Vina)">4.6. 3D visualization of docking results (AutoDock Vina)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.7.-2D-interaction-table-and-map">4.7. 2D interaction table and map</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#5.-Docking-with-Smina">5. Docking with Smina</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#5.1.-Receptor-preparation">5.1. Receptor preparation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.2.-Ligand-preparation">5.2. Ligand preparation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.3.-Docking-box-definition">5.3. Docking box definition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.4.-Docking">5.4. Docking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.6.-3D-visualization-of-docking-results">5.6. 3D visualization of docking results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.7.-2D-interaction-table-and-map">5.7. 2D interaction table and map</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#6.-Docking-with-LeDock">6. Docking with LeDock</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#6.1.-Receptor-preparation">6.1. Receptor preparation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.2.-Ligand-preparation">6.2. Ligand preparation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.3.-Docking-box-definition">6.3. Docking box definition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.4.-Docking">6.4. Docking</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.5.-DOK-results-file-conversion-to-SDF">6.5. DOK results file conversion to SDF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.6.-3D-visualization-of-docking-results">6.6. 3D visualization of docking results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.7.-2D-interaction-table-and-map">6.7. 2D interaction table and map</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="VirtualScreening.html">Virtual Screening</a></li>
-</ul>
-
-        </div>
-      </div>
-    </nav>
-
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Chem-Workflows</a>
-      </nav>
-
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
-  <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">Molecular docking</li>
-      <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/content/MolecularDocking.ipynb.txt" rel="nofollow"> View page source</a>
-      </li>
-  </ul>
-  <hr/>
-</div>
-          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
-           <div itemprop="articleBody">
-             
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
   <section id="Molecular-docking">
-<h1>Molecular docking<a class="headerlink" href="#Molecular-docking" title="Permalink to this heading"></a></h1>
+<h1>Molecular docking<a class="headerlink" href="#Molecular-docking" title="Permalink to this heading">¶</a></h1>
 <p>This is the main protocol of Jupyter Dock.</p>
 <section id="Content-of-this-notebook">
-<h2>Content of this notebook<a class="headerlink" href="#Content-of-this-notebook" title="Permalink to this heading"></a></h2>
+<h2>Content of this notebook<a class="headerlink" href="#Content-of-this-notebook" title="Permalink to this heading">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Feching system and cleanup</p></li>
 <li><p>Protein and ligand sanitization</p></li>
@@ -232,7 +143,7 @@ warnings.filterwarnings(&quot;ignore&quot;)
 </div>
 </section>
 <section id="1.-Feching-system-and-cleanup">
-<h2>1. Feching system and cleanup<a class="headerlink" href="#1.-Feching-system-and-cleanup" title="Permalink to this heading"></a></h2>
+<h2>1. Feching system and cleanup<a class="headerlink" href="#1.-Feching-system-and-cleanup" title="Permalink to this heading">¶</a></h2>
 <p>Implementing Pymol is a simple way to download PDB structures. The user can launch this or any other Jupyter Dock’s protocol by providing his or her own files.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -249,11 +160,11 @@ cmd.delete(&#39;all&#39;)
 </div>
 </section>
 <section id="2.-Protein-and-ligand-sanitization">
-<h2>2. Protein and ligand sanitization<a class="headerlink" href="#2.-Protein-and-ligand-sanitization" title="Permalink to this heading"></a></h2>
+<h2>2. Protein and ligand sanitization<a class="headerlink" href="#2.-Protein-and-ligand-sanitization" title="Permalink to this heading">¶</a></h2>
 <section id="2.1.-Protein-Sanitization">
-<h3>2.1. Protein Sanitization<a class="headerlink" href="#2.1.-Protein-Sanitization" title="Permalink to this heading"></a></h3>
+<h3>2.1. Protein Sanitization<a class="headerlink" href="#2.1.-Protein-Sanitization" title="Permalink to this heading">¶</a></h3>
 <section id="Method-1:-LePro">
-<h4>Method 1: LePro<a class="headerlink" href="#Method-1:-LePro" title="Permalink to this heading"></a></h4>
+<h4>Method 1: LePro<a class="headerlink" href="#Method-1:-LePro" title="Permalink to this heading">¶</a></h4>
 <p>The Lephar molecular docking suite includes a very powerful tool for automatically preparing proteins for molecular docking. As a result, for these protocols, it will be the preferred tool for protein preparation. The protein prepared by LePro can be used in AutoDock VIna and LeDock.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -295,7 +206,7 @@ os.rename(&#39;pro.pdb&#39;,&#39;1AZ8_clean_H.pdb&#39;) # Output from lepro is p
 </div>
 </section>
 <section id="Method-2:-fix_protein-(PDBFixer)">
-<h4>Method 2: fix_protein (PDBFixer)<a class="headerlink" href="#Method-2:-fix_protein-(PDBFixer)" title="Permalink to this heading"></a></h4>
+<h4>Method 2: fix_protein (PDBFixer)<a class="headerlink" href="#Method-2:-fix_protein-(PDBFixer)" title="Permalink to this heading">¶</a></h4>
 <p>For proteins with missing amino acids or residues, or to ensure a more thorough sanitization of protein Jupyter Dock includes the <em>fix_protein()</em> function, which employs PDBFixer to correct a wide range of common errors in protein pdb files. Furthermore, PDBFixer enables the assignment of pH-dependent protonation states to proteins.</p>
 <blockquote>
 <div><p><strong>Warning 1:</strong> It is possible to encounter problems with protein fixing when using <strong>fix_protein()</strong> and AutoDock Tools’ <strong>prepare_receptor</strong> or when running LeDock. To resolve the issue, it is best to set the parameter <em>-A hydrogens</em> in <em>prepare receptor</em>.</p>
@@ -317,7 +228,7 @@ os.rename(&#39;pro.pdb&#39;,&#39;1AZ8_clean_H.pdb&#39;) # Output from lepro is p
 </section>
 </section>
 <section id="2.2.-Ligand-sanitization">
-<h3>2.2. Ligand sanitization<a class="headerlink" href="#2.2.-Ligand-sanitization" title="Permalink to this heading"></a></h3>
+<h3>2.2. Ligand sanitization<a class="headerlink" href="#2.2.-Ligand-sanitization" title="Permalink to this heading">¶</a></h3>
 <p>Due to the variability of ligands and formats, ligand sanitization and preparation can be one of the most difficult tasks to complete. Setting protonation states for a ligand, for example, can be difficult. It is highly recommended that the user knows and understands the proper states for his/her ligand(s) when using Jupyter Dock or any other molecular docking approach.</p>
 <p>In this example, after splitting the ligand and protein after fetching with pymol, the ligand has sanitization problems <strong>(sanitize=False in Chem.MolFromMol2File)</strong></p>
 <div class="nbinput docutils container">
@@ -381,7 +292,7 @@ m
 </section>
 </section>
 <section id="3.-System-Visualization">
-<h2>3. System Visualization<a class="headerlink" href="#3.-System-Visualization" title="Permalink to this heading"></a></h2>
+<h2>3. System Visualization<a class="headerlink" href="#3.-System-Visualization" title="Permalink to this heading">¶</a></h2>
 <p>A cool feature of Jupyter Dock is the posibility of visualize ligand-protein complexes and docking results into the notebbok. All this thanks to the powerful py3Dmol.</p>
 <p>Now the protein and ligand have been sanitized it would be recomended to vissualize the ligand-protein reference system.</p>
 <div class="nbinput docutils container">
@@ -457,16 +368,16 @@ viewer_1634308791185067.render();
 </div>
 </section>
 <section id="4.-Docking-with-AutoDock-Vina">
-<h2>4. Docking with AutoDock Vina<a class="headerlink" href="#4.-Docking-with-AutoDock-Vina" title="Permalink to this heading"></a></h2>
+<h2>4. Docking with AutoDock Vina<a class="headerlink" href="#4.-Docking-with-AutoDock-Vina" title="Permalink to this heading">¶</a></h2>
 <p>AutoDock Vina (Vina) is one of the docking engines in the AutoDock Suite, together with AutoDock4 (AD4), AutoDockGPU, AutoDockFR, and AutoDock-CrankPep, and arguably among the most widely used and successful docking engines. The reasons for this success are mostly due to its ease of use and its speed (up to 100x faster than AD4), when compared to the other docking engines in the suite and elsewhere, as well as being open source.</p>
 <section id="4.1.-Protein-preparation">
-<h3>4.1. Protein preparation<a class="headerlink" href="#4.1.-Protein-preparation" title="Permalink to this heading"></a></h3>
+<h3>4.1. Protein preparation<a class="headerlink" href="#4.1.-Protein-preparation" title="Permalink to this heading">¶</a></h3>
 <p>After sanitization, the protein docking preparation includes converting it to the PDBQT file format, which stores the atomic coordinates, partial charges, and AutoDock atom types for both the receptor and the ligand.</p>
 <blockquote>
 <div><p><strong>Hint:</strong> Despite the fact that the PDBQT format includes changes (Q) and atom types (T) for molecular docking. The charges are not required for Autodock Vina, which computes electrostatic interactions using its own force field. Although, when using AutoDock instead of AutoDock Vina, the Q term is required. More information can be found here:https://autodock-vina.readthedocs.io/en/latest/introduction.html</p>
 </div></blockquote>
 <section id="Method-1:-AutoDock-Tools-prepare_receptor">
-<h4>Method 1: AutoDock Tools prepare_receptor<a class="headerlink" href="#Method-1:-AutoDock-Tools-prepare_receptor" title="Permalink to this heading"></a></h4>
+<h4>Method 1: AutoDock Tools prepare_receptor<a class="headerlink" href="#Method-1:-AutoDock-Tools-prepare_receptor" title="Permalink to this heading">¶</a></h4>
 <p>The AutoDock Tools are the best way to prepare the receptor for AutoDock Vina. Nonetheless, AutoDock Tools is a comprehensive suite of programs and scripts that are difficult to manage. Jupyter Dock execute the <strong>prepare receptor</strong> and <strong>prepare_ligand</strong> functions on their own. As a result, obtaining proper PDBQT files for AutoDock Vina has never been easier.</p>
 <blockquote>
 <div><p><strong>Warning:</strong> There is currently only one method for preparing a PDBQT file for a receptor. It is expected that new methods apart from AutoDock Tools executables will be included in the near future into Jupyter Dock.</p>
@@ -553,13 +464,13 @@ adding gasteiger charges to peptide
 </section>
 </section>
 <section id="4.2.-Ligand-preparation">
-<h3>4.2. Ligand preparation<a class="headerlink" href="#4.2.-Ligand-preparation" title="Permalink to this heading"></a></h3>
+<h3>4.2. Ligand preparation<a class="headerlink" href="#4.2.-Ligand-preparation" title="Permalink to this heading">¶</a></h3>
 <p>As previously discussed, one of the major challenges for proper docking experimentation is ligand preparation.</p>
 <blockquote>
 <div><p><strong>Hint:</strong> The hydroges in this example were set during the ligand sanitization step (section 2.2). As a result, the ligand will be prepared as is. Furthermore, before running the docking, it is highly recommended to inspect the ligand(s) after preparation to ensure proper structure and molecule features.</p>
 </div></blockquote>
 <section id="Method-1:-AutoDock-Tools-prepare_ligand">
-<h4>Method 1: AutoDock Tools prepare_ligand<a class="headerlink" href="#Method-1:-AutoDock-Tools-prepare_ligand" title="Permalink to this heading"></a></h4>
+<h4>Method 1: AutoDock Tools prepare_ligand<a class="headerlink" href="#Method-1:-AutoDock-Tools-prepare_ligand" title="Permalink to this heading">¶</a></h4>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -634,7 +545,7 @@ No change in atomic coordinates
 </div>
 </section>
 <section id="Method-2:-Meeko">
-<h4>Method 2: Meeko<a class="headerlink" href="#Method-2:-Meeko" title="Permalink to this heading"></a></h4>
+<h4>Method 2: Meeko<a class="headerlink" href="#Method-2:-Meeko" title="Permalink to this heading">¶</a></h4>
 <p>This is the preferred method out of AutoDock Tools. Apart from ligand preparation, Meeko provides tools for other docking aspects that the AutoDock Tools software suite does not cover. Hydrated docking and macrocycles are two examples. More about Meeko <a class="reference external" href="https://pypi.org/project/meeko/">https://pypi.org/project/meeko/</a></p>
 <blockquote>
 <div><p><strong>Info</strong> To run Meeko change the next cell type from “Markdown” to “Code”.</p>
@@ -649,7 +560,7 @@ preparator.write_pdbqt_file(&#39;1AZ8_lig_H.pdbqt&#39;)
 </div>
 </section>
 <section id="Method-3:-Pybel">
-<h4>Method 3: Pybel<a class="headerlink" href="#Method-3:-Pybel" title="Permalink to this heading"></a></h4>
+<h4>Method 3: Pybel<a class="headerlink" href="#Method-3:-Pybel" title="Permalink to this heading">¶</a></h4>
 <p>OpenBabel (pybel) can handle a variety of file formats and conversions between them. As a result, any chemical format file can be converted directly to PDBQT. Nonetheless, pybel may encounter issues if the source file format contains errors.</p>
 <blockquote>
 <div><p><strong>Info</strong> To run Pybel change the next cell type from “Markdown” to “Code”.</p>
@@ -663,7 +574,7 @@ out.close()
 </section>
 </section>
 <section id="4.3.-Box-definition">
-<h3>4.3. Box definition<a class="headerlink" href="#4.3.-Box-definition" title="Permalink to this heading"></a></h3>
+<h3>4.3. Box definition<a class="headerlink" href="#4.3.-Box-definition" title="Permalink to this heading">¶</a></h3>
 <p>This is possibly the most important feature of Jupyter Dock. Making a docking box without the use of a visualizer or any other additional tools. As a result, AutoDock Vina (and LeDock) can now be run entirely in a Jupyter notebook.</p>
 <p>Mengwu Xiao and his clever Pymol plug-in <a class="reference external" href="https://github.com/MengwuXiao/GetBox-PyMOL-Plugin">“GetBox”</a> inspired the box definition in Jupyter Dock.</p>
 <p>Jupyter Dock makes use of Mengwu Xiao Pymol implementation, but this time through the Pymol API.</p>
@@ -706,7 +617,7 @@ print(center,&#39;\n&#39;,size)
 </div>
 </section>
 <section id="4.4.-Docking">
-<h3>4.4. Docking<a class="headerlink" href="#4.4.-Docking" title="Permalink to this heading"></a></h3>
+<h3>4.4. Docking<a class="headerlink" href="#4.4.-Docking" title="Permalink to this heading">¶</a></h3>
 <p>AutoDock Vina 1.2.0, which was recently released, now allows AutoDock Vina to be executed using Python Bindings. Jupyter Dock takes advantage of this feature to make the docking protocol run entirely within a Jupyter notebook.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -740,7 +651,7 @@ v.write_poses(&#39;1AZ8_lig_vina_out.pdbqt&#39;, n_poses=10, overwrite=True)
 </div>
 </section>
 <section id="4.5.-PDBQT-results-file-conversion-to-SDF">
-<h3>4.5. PDBQT results file conversion to SDF<a class="headerlink" href="#4.5.-PDBQT-results-file-conversion-to-SDF" title="Permalink to this heading"></a></h3>
+<h3>4.5. PDBQT results file conversion to SDF<a class="headerlink" href="#4.5.-PDBQT-results-file-conversion-to-SDF" title="Permalink to this heading">¶</a></h3>
 <p>Because of the unique characteristics of the PDBQT format, it may be difficult to visualize the results or perform other analyses after docking. As a result, Jupyter Dock automatically converts the PDFBQT format to the more common SDF format. The file conversion preserves the chemical properties of the compounds after they have been sanitized and prepared. Furthermore, the “Pose” and “Score” information is saved as a molecule attribute. Such data can be accessed directly in the file or via Pybel
 or RDKit.</p>
 <p><strong>pdbqt_to_sdf ( params )</strong></p>
@@ -759,7 +670,7 @@ or RDKit.</p>
 </div>
 </section>
 <section id="4.6.-3D-visualization-of-docking-results-(AutoDock-Vina)">
-<h3>4.6. 3D visualization of docking results (AutoDock Vina)<a class="headerlink" href="#4.6.-3D-visualization-of-docking-results-(AutoDock-Vina)" title="Permalink to this heading"></a></h3>
+<h3>4.6. 3D visualization of docking results (AutoDock Vina)<a class="headerlink" href="#4.6.-3D-visualization-of-docking-results-(AutoDock-Vina)" title="Permalink to this heading">¶</a></h3>
 <p>As with the system visualization (section 3), the docking results can be inspected and compared to the reference structure (if exist). The ligand’s “Pose” and “Score” information will also be displayed to show how acces to this molecule’s attributes.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
@@ -857,7 +768,7 @@ viewer_16343088556535964.render();
 </div>
 </section>
 <section id="4.7.-2D-interaction-table-and-map">
-<h3>4.7. 2D interaction table and map<a class="headerlink" href="#4.7.-2D-interaction-table-and-map" title="Permalink to this heading"></a></h3>
+<h3>4.7. 2D interaction table and map<a class="headerlink" href="#4.7.-2D-interaction-table-and-map" title="Permalink to this heading">¶</a></h3>
 <p>Inspecting the molecular interactions is one of the most common analyses performed by a computational scientist following a docking experiment. As a result, Jupyter Dock uses ProLif to create a table of ligand-protein molecular interactions as well as the corresponding 2D map.</p>
 <blockquote>
 <div><p><strong>Info:</strong> ProLif uses RDKit and MDAnalysis to map the molecular interaction between a ligand and a protein. As a result, some protein preparations, including the use of LePro, can result in errors that impede analysis. Jupyter Dock’s _**fix protein()_** function can be used to avoid such errors and provide a suitable protein structure for the analysis.</p>
@@ -1193,26 +1104,26 @@ net.display()
 </section>
 </section>
 <section id="5.-Docking-with-Smina">
-<h2>5. Docking with Smina<a class="headerlink" href="#5.-Docking-with-Smina" title="Permalink to this heading"></a></h2>
+<h2>5. Docking with Smina<a class="headerlink" href="#5.-Docking-with-Smina" title="Permalink to this heading">¶</a></h2>
 <p>Despite the presence of Python bindings in AutoDock Vina 1.2.0, other tools that incorporate AutoDock Vina allow for cool features such as custom score functions (smina), fast execution (qvina), and the use of wider boxes (qvina-w). Jupyter Dock can run such binaries in a notebook, giving users more options.</p>
 <p>Smina is a fork of AutoDock Vina that is customized to better support scoring function development and high-performance energy minimization. Smina is maintained by David Koes at the University of Pittsburgh and is not directly affiliated with the AutoDock project.</p>
 <blockquote>
 <div><p><strong>Info:</strong> The following cell contains an example of using Smina to run the current docking example. However, the executable files for qvina and qvina-w are available in the Jupyter Dock repo’s bin directory. As a result, the user can use such a tool by adding the necessary cells or replacing the current docking engine.</p>
 </div></blockquote>
 <section id="5.1.-Receptor-preparation">
-<h3>5.1. Receptor preparation<a class="headerlink" href="#5.1.-Receptor-preparation" title="Permalink to this heading"></a></h3>
+<h3>5.1. Receptor preparation<a class="headerlink" href="#5.1.-Receptor-preparation" title="Permalink to this heading">¶</a></h3>
 <p>Despite the fact that Smina is a modified version of AutoDock Vina, the input file for a receptor in Smina can be either a PDBQT file or a PDB file with explicit hydrogens in all residues. At this point, we can make use of the file sanitization steps as well as a protein structure from Jupyter Dock’s <strong>fix_protein()</strong> function.</p>
 </section>
 <section id="5.2.-Ligand-preparation">
-<h3>5.2. Ligand preparation<a class="headerlink" href="#5.2.-Ligand-preparation" title="Permalink to this heading"></a></h3>
+<h3>5.2. Ligand preparation<a class="headerlink" href="#5.2.-Ligand-preparation" title="Permalink to this heading">¶</a></h3>
 <p>In Smina, we can use any OpenBabel format for ligand input and docking results, just like we can for receptor preparation. As a result, after sanitization, we can use the ligand MOL2 file here.</p>
 </section>
 <section id="5.3.-Docking-box-definition">
-<h3>5.3. Docking box definition<a class="headerlink" href="#5.3.-Docking-box-definition" title="Permalink to this heading"></a></h3>
+<h3>5.3. Docking box definition<a class="headerlink" href="#5.3.-Docking-box-definition" title="Permalink to this heading">¶</a></h3>
 <p>This step can be completed in the same manner as the AutoDock Vina box definition.</p>
 </section>
 <section id="5.4.-Docking">
-<h3>5.4. Docking<a class="headerlink" href="#5.4.-Docking" title="Permalink to this heading"></a></h3>
+<h3>5.4. Docking<a class="headerlink" href="#5.4.-Docking" title="Permalink to this heading">¶</a></h3>
 <p>Jupyter Dock comes with the smina executable for Linux and Mac OS. By running the binary file, the parameters can be accessed.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
@@ -1378,7 +1289,7 @@ Loop time 30.808
 </div>
 </section>
 <section id="5.6.-3D-visualization-of-docking-results">
-<h3>5.6. 3D visualization of docking results<a class="headerlink" href="#5.6.-3D-visualization-of-docking-results" title="Permalink to this heading"></a></h3>
+<h3>5.6. 3D visualization of docking results<a class="headerlink" href="#5.6.-3D-visualization-of-docking-results" title="Permalink to this heading">¶</a></h3>
 <p>As with the system visualization (section 3), the docking results can be inspected and compared to the reference structure (if one exists). Smina saves the “minimizedAffinity” information corresponding to the docking score as the molecule’s attribute.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
@@ -1476,7 +1387,7 @@ viewer_16343088995318336.render();
 </div>
 </section>
 <section id="5.7.-2D-interaction-table-and-map">
-<h3>5.7. 2D interaction table and map<a class="headerlink" href="#5.7.-2D-interaction-table-and-map" title="Permalink to this heading"></a></h3>
+<h3>5.7. 2D interaction table and map<a class="headerlink" href="#5.7.-2D-interaction-table-and-map" title="Permalink to this heading">¶</a></h3>
 <p>Inspecting the molecular interactions is one of the most common analyses performed by a computational scientist following a docking experiment. As a result, Jupyter Dock uses ProLif to create a table of ligand-protein molecular interactions as well as the corresponding 2D map.</p>
 <blockquote>
 <div><p><strong>Info:</strong> ProLif uses RDKit and MDAnalysis to map the molecular interaction between a ligand and a protein. As a result, some protein preparations, including the use of LePro, can result in errors that impede analysis. Jupyter Dock’s _**fix protein()_** function can be used to avoid such errors and provide a suitable protein structure for the analysis.</p>
@@ -1796,18 +1707,18 @@ net.display()
 </section>
 </section>
 <section id="6.-Docking-with-LeDock">
-<h2>6. Docking with LeDock<a class="headerlink" href="#6.-Docking-with-LeDock" title="Permalink to this heading"></a></h2>
+<h2>6. Docking with LeDock<a class="headerlink" href="#6.-Docking-with-LeDock" title="Permalink to this heading">¶</a></h2>
 <p>LeDock is designed for fast and accurate flexible docking of small molecules into a protein. It achieves a pose-prediction accuracy of greater than 90% on the Astex diversity set and takes about 3 seconds per run for a drug-like molecule. It has led to the discovery of novel kinase inhibitors and bromodomain antagonists from high-throughput virtual screening campaigns. It directly uses SYBYL Mol2 format as input for small molecules.</p>
 <section id="6.1.-Receptor-preparation">
-<h3>6.1. Receptor preparation<a class="headerlink" href="#6.1.-Receptor-preparation" title="Permalink to this heading"></a></h3>
+<h3>6.1. Receptor preparation<a class="headerlink" href="#6.1.-Receptor-preparation" title="Permalink to this heading">¶</a></h3>
 <p>In LeDock, the input file for a receptor is a PDB file with explicit hydrogens in all residues. LePro was created as a tool for preparing protein structures for docking with LeDock. Thus, at this stage, we can use the file ater sanitization steps as well as a protein structure from Jupyter Dock’s <strong>fix_protein()</strong> function.</p>
 </section>
 <section id="6.2.-Ligand-preparation">
-<h3>6.2. Ligand preparation<a class="headerlink" href="#6.2.-Ligand-preparation" title="Permalink to this heading"></a></h3>
+<h3>6.2. Ligand preparation<a class="headerlink" href="#6.2.-Ligand-preparation" title="Permalink to this heading">¶</a></h3>
 <p>As previously stated, the input format for ligand in LeDock is MOL2. Similarly to the receptor preparation, we can use the ligand directly after sanitization.</p>
 </section>
 <section id="6.3.-Docking-box-definition">
-<h3>6.3. Docking box definition<a class="headerlink" href="#6.3.-Docking-box-definition" title="Permalink to this heading"></a></h3>
+<h3>6.3. Docking box definition<a class="headerlink" href="#6.3.-Docking-box-definition" title="Permalink to this heading">¶</a></h3>
 <p>This step can be completed in the same manner as the AutoDock Vina box definition. To obtain the identical box from AutoDock Vina docking but in LeDock format, the user only needs to change the parameter “software” from “vina” to “ledock.”</p>
 <blockquote>
 <div><p><strong>Info:</strong> The implementation of the <strong>get_box()</strong> function allows for the easy replication of binding sites between AutoDock Vina and LeDock, with the goal of replicating and comparing results between both programs.</p>
@@ -1838,7 +1749,7 @@ print(X,&#39;\n&#39;,Y,&#39;\n&#39;,Z)
 </div>
 </section>
 <section id="6.4.-Docking">
-<h3>6.4. Docking<a class="headerlink" href="#6.4.-Docking" title="Permalink to this heading"></a></h3>
+<h3>6.4. Docking<a class="headerlink" href="#6.4.-Docking" title="Permalink to this heading">¶</a></h3>
 <p>To run LeDock, a configuration (commonly known as dock.in) file containing all docking parameters as well as information about the receptor and ligand(s) to dock is required. Jupyter Dock uses the function <strong>generate ledock file()</strong> to generate the configuration file automatically. After configuring the parameters, the user will receive a configuration file as well as a file containing a list of ligand(s) to dock (commonly named ligand.list). After this, docking would be as simple as launching
 the LeDock executable and the configuration file as parameter.</p>
 <p><strong>generate_ledock_file( params )</strong></p>
@@ -1905,7 +1816,7 @@ the LeDock executable and the configuration file as parameter.</p>
 </div>
 </section>
 <section id="6.5.-DOK-results-file-conversion-to-SDF">
-<h3>6.5. DOK results file conversion to SDF<a class="headerlink" href="#6.5.-DOK-results-file-conversion-to-SDF" title="Permalink to this heading"></a></h3>
+<h3>6.5. DOK results file conversion to SDF<a class="headerlink" href="#6.5.-DOK-results-file-conversion-to-SDF" title="Permalink to this heading">¶</a></h3>
 <p>The end result of LeDock is a file with the dok extension that contains the docking properties in the same way that a pdb file does. Nonetheless, the dok file is not a widely used format for representing chemical structures. As a result, Jupyter Dock can convert dok files to the widely used sdf format. Jupyter Dock, like in the pdbqt to sdf conversion, will preserve the chemical features and save the “Pose” and “Score” results as molecule attributes.</p>
 <p><strong>dok_to_sdf ( params )</strong></p>
 <p>params:</p>
@@ -1923,7 +1834,7 @@ the LeDock executable and the configuration file as parameter.</p>
 </div>
 </section>
 <section id="6.6.-3D-visualization-of-docking-results">
-<h3>6.6. 3D visualization of docking results<a class="headerlink" href="#6.6.-3D-visualization-of-docking-results" title="Permalink to this heading"></a></h3>
+<h3>6.6. 3D visualization of docking results<a class="headerlink" href="#6.6.-3D-visualization-of-docking-results" title="Permalink to this heading">¶</a></h3>
 <p>As with the system visualization (section 3), the docking results can be inspected and compared to the reference structure (if exist). The ligand’s “Pose” and “Score” information will also be displayed to show how acces to this molecule’s attributes.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
@@ -2021,7 +1932,7 @@ viewer_16343089537916467.render();
 </div>
 </section>
 <section id="6.7.-2D-interaction-table-and-map">
-<h3>6.7. 2D interaction table and map<a class="headerlink" href="#6.7.-2D-interaction-table-and-map" title="Permalink to this heading"></a></h3>
+<h3>6.7. 2D interaction table and map<a class="headerlink" href="#6.7.-2D-interaction-table-and-map" title="Permalink to this heading">¶</a></h3>
 <p>Inspecting the molecular interactions is one of the most common analyses performed by a computational scientist following a docking experiment. As a result, Jupyter Dock uses ProLif to create a table of ligand-protein molecular interactions as well as the corresponding 2D map.</p>
 <blockquote>
 <div><p><strong>Info:</strong> ProLif uses RDKit and MDAnalysis to map the molecular interaction between a ligand and a protein. As a result, some protein preparations, including the use of LePro, can result in errors that impede analysis. Jupyter Dock’s <em>fix protein()</em> function can be used to avoid such errors and provide a suitable protein structure for the analysis.</p>
@@ -2560,45 +2471,120 @@ net.display()
 </section>
 
 
-           </div>
+            <div class="clearer"></div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="RetrieveUniprot.html" class="btn btn-neutral float-left" title="Retrieve Uniprot data using python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="VirtualScreening.html" class="btn btn-neutral float-right" title="Virtual Screening" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
-
-  <hr/>
-
-  <div role="contentinfo">
-    <p>&#169; Copyright 2023, Angel J. Ruiz-Moreno.</p>
-  </div>
-
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
-
-</footer>
         </div>
       </div>
-    </section>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Molecular docking</a><ul>
+<li><a class="reference internal" href="#Content-of-this-notebook">Content of this notebook</a></li>
+<li><a class="reference internal" href="#1.-Feching-system-and-cleanup">1. Feching system and cleanup</a></li>
+<li><a class="reference internal" href="#2.-Protein-and-ligand-sanitization">2. Protein and ligand sanitization</a><ul>
+<li><a class="reference internal" href="#2.1.-Protein-Sanitization">2.1. Protein Sanitization</a><ul>
+<li><a class="reference internal" href="#Method-1:-LePro">Method 1: LePro</a></li>
+<li><a class="reference internal" href="#Method-2:-fix_protein-(PDBFixer)">Method 2: fix_protein (PDBFixer)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#2.2.-Ligand-sanitization">2.2. Ligand sanitization</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#3.-System-Visualization">3. System Visualization</a></li>
+<li><a class="reference internal" href="#4.-Docking-with-AutoDock-Vina">4. Docking with AutoDock Vina</a><ul>
+<li><a class="reference internal" href="#4.1.-Protein-preparation">4.1. Protein preparation</a><ul>
+<li><a class="reference internal" href="#Method-1:-AutoDock-Tools-prepare_receptor">Method 1: AutoDock Tools prepare_receptor</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#4.2.-Ligand-preparation">4.2. Ligand preparation</a><ul>
+<li><a class="reference internal" href="#Method-1:-AutoDock-Tools-prepare_ligand">Method 1: AutoDock Tools prepare_ligand</a></li>
+<li><a class="reference internal" href="#Method-2:-Meeko">Method 2: Meeko</a></li>
+<li><a class="reference internal" href="#Method-3:-Pybel">Method 3: Pybel</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#4.3.-Box-definition">4.3. Box definition</a></li>
+<li><a class="reference internal" href="#4.4.-Docking">4.4. Docking</a></li>
+<li><a class="reference internal" href="#4.5.-PDBQT-results-file-conversion-to-SDF">4.5. PDBQT results file conversion to SDF</a></li>
+<li><a class="reference internal" href="#4.6.-3D-visualization-of-docking-results-(AutoDock-Vina)">4.6. 3D visualization of docking results (AutoDock Vina)</a></li>
+<li><a class="reference internal" href="#4.7.-2D-interaction-table-and-map">4.7. 2D interaction table and map</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#5.-Docking-with-Smina">5. Docking with Smina</a><ul>
+<li><a class="reference internal" href="#5.1.-Receptor-preparation">5.1. Receptor preparation</a></li>
+<li><a class="reference internal" href="#5.2.-Ligand-preparation">5.2. Ligand preparation</a></li>
+<li><a class="reference internal" href="#5.3.-Docking-box-definition">5.3. Docking box definition</a></li>
+<li><a class="reference internal" href="#5.4.-Docking">5.4. Docking</a></li>
+<li><a class="reference internal" href="#5.6.-3D-visualization-of-docking-results">5.6. 3D visualization of docking results</a></li>
+<li><a class="reference internal" href="#5.7.-2D-interaction-table-and-map">5.7. 2D interaction table and map</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#6.-Docking-with-LeDock">6. Docking with LeDock</a><ul>
+<li><a class="reference internal" href="#6.1.-Receptor-preparation">6.1. Receptor preparation</a></li>
+<li><a class="reference internal" href="#6.2.-Ligand-preparation">6.2. Ligand preparation</a></li>
+<li><a class="reference internal" href="#6.3.-Docking-box-definition">6.3. Docking box definition</a></li>
+<li><a class="reference internal" href="#6.4.-Docking">6.4. Docking</a></li>
+<li><a class="reference internal" href="#6.5.-DOK-results-file-conversion-to-SDF">6.5. DOK results file conversion to SDF</a></li>
+<li><a class="reference internal" href="#6.6.-3D-visualization-of-docking-results">6.6. 3D visualization of docking results</a></li>
+<li><a class="reference internal" href="#6.7.-2D-interaction-table-and-map">6.7. 2D interaction table and map</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   </div>
-  <script>
-      jQuery(function () {
-          SphinxRtdTheme.Navigation.enable(false);
-      });
-  </script>
-    <!-- Theme Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-B3SRZ82WR5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-B3SRZ82WR5', {
-          'anonymize_ip': false,
-      });
-    </script> 
-
-</body>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="RetrieveUniprot.html"
+                          title="previous chapter">Retrieve Uniprot data using python</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="VirtualScreening.html"
+                          title="next chapter">Virtual Screening</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/content/MolecularDocking.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="VirtualScreening.html" title="Virtual Screening"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="RetrieveUniprot.html" title="Retrieve Uniprot data using python"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Chem-Workflows  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Molecular docking</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2023, Angel J. Ruiz-Moreno.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
+    </div>
+  </body>
 </html>
